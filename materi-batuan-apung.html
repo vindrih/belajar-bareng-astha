@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar tentang Batuan Apung - Kelas 4 SD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --pumice: #d4c4a8;
+      --pumice-dark: #a89070;
+      --accent: #2a9d8f;
+      --accent2: #e9c46a;
+      --sky: #a8dadc;
+      --water: #48cae4;
+      --text: #2b2d42;
+      --card-bg: #fefcf8;
+      --lava-red: #e76f51;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', 'Comic Neue', sans-serif;
+      background: linear-gradient(180deg, #a8dadc 0%, #caf0f8 35%, #e8f5e9 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2a9d8f, #1d7a6f);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(42, 157, 143, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e9ecef;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2a9d8f, #e9c46a);
+      border-radius: 10px;
+      transition: width 0.4s ease;
+      width: 16.6%;
+    }
+
+    .nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+      border-color: #1d7a6f;
+    }
+
+    .nav-dot:hover { background: var(--accent2); }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+      border-color: var(--accent);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      color: #1d7a6f;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .emoji { font-size: 1.7rem; }
+
+    p, li { font-size: 1.12rem; margin-bottom: 0.8rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.5rem; }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe066 0%, #e9c46a 100%);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Floating rock animation */
+    .float-demo {
+      width: 100%;
+      max-width: 360px;
+      height: 220px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to bottom, #87ceeb 0%, #48cae4 55%, #0077b6 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .water-surface {
+      position: absolute;
+      top: 55%;
+      left: 0; right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.4);
+      z-index: 2;
+    }
+
+    .pumice-rock {
+      position: absolute;
+      width: 70px;
+      height: 55px;
+      background: radial-gradient(circle at 30% 30%, #e8dcc8, #c4b090 60%, #a89070);
+      border-radius: 50% 40% 55% 45%;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 35%;
+      z-index: 3;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: top 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .pumice-rock::before,
+    .pumice-rock::after {
+      content: '';
+      position: absolute;
+      background: rgba(100,80,50,0.35);
+      border-radius: 50%;
+    }
+
+    .pumice-rock::before {
+      width: 12px; height: 10px;
+      top: 15px; left: 18px;
+    }
+
+    .pumice-rock::after {
+      width: 8px; height: 8px;
+      top: 28px; left: 40px;
+    }
+
+    .pumice-rock.sinking {
+      top: 70%;
+    }
+
+    .bubble {
+      position: absolute;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      bottom: 20%;
+      animation: bubbleUp 3s infinite ease-in;
+      opacity: 0;
+    }
+
+    .float-demo:hover .bubble,
+    .float-demo.active .bubble {
+      opacity: 1;
+    }
+
+    @keyframes bubbleUp {
+      0% { transform: translateY(0) scale(0.5); opacity: 0.6; }
+      100% { transform: translateY(-120px) scale(1.2); opacity: 0; }
+    }
+
+    .float-label {
+      text-align: center;
+      font-weight: 700;
+      color: #1d7a6f;
+      font-size: 1.05rem;
+      margin-top: 0.6rem;
+      min-height: 1.4rem;
+    }
+
+    /* Pore close-up */
+    .pore-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .pore-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      width: 160px;
+      text-align: center;
+      border: 3px solid #e0d5c0;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .pore-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      border-color: var(--accent);
+    }
+
+    .pore-card .icon { font-size: 2.8rem; margin-bottom: 0.4rem; }
+    .pore-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+    .pore-card p { font-size: 0.95rem; color: #555; }
+
+    /* Formation steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: white;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      border-left: 6px solid var(--accent);
+      transition: transform 0.25s;
+    }
+
+    .step:hover { transform: translateX(6px); }
+
+    .step-num {
+      background: var(--accent);
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .step-content p { font-size: 1rem; margin: 0; color: #444; }
+
+    /* Compare weight */
+    .compare-weight {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 550px) {
+      .compare-weight { grid-template-columns: 1fr; }
+    }
+
+    .weight-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.3rem;
+      text-align: center;
+      border: 3px solid #eee;
+      transition: transform 0.3s;
+    }
+
+    .weight-card:hover { transform: translateY(-5px); }
+    .weight-card.heavy { border-color: #6c757d; }
+    .weight-card.light { border-color: var(--accent); }
+    .weight-card .icon { font-size: 3rem; margin-bottom: 0.4rem; }
+    .weight-card h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+
+    /* Fact cards */
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .fact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px dashed var(--accent);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .fact-card:hover {
+      background: #e8f8f5;
+      transform: scale(1.03);
+    }
+
+    .fact-card .icon { font-size: 2.4rem; margin-bottom: 0.4rem; }
+    .fact-card .answer {
+      display: none;
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed #ccc;
+      font-size: 0.98rem;
+      color: #1d7a6f;
+      font-weight: 600;
+    }
+
+    .fact-card.revealed .answer { display: block; animation: fadeIn 0.4s; }
+    .fact-card.revealed {
+      border-style: solid;
+      background: #e8f8f5;
+    }
+
+    /* Tip & warning */
+    .tip {
+      background: #e0f7fa;
+      border-left: 5px solid #00acc1;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .fun {
+      background: #fff8e7;
+      border-left: 5px solid #e9c46a;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    /* Navigation buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #2a9d8f, #1d7a6f);
+      color: white;
+      box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(42, 157, 143, 0.4);
+    }
+
+    .btn-prev {
+      background: linear-gradient(135deg, #6c757d, #495057);
+      color: white;
+    }
+
+    .btn-prev:hover { transform: translateY(-2px); }
+
+    /* Quiz */
+    .quiz-question {
+      background: white;
+      border-radius: 16px;
+      padding: 1.4rem;
+      margin-bottom: 1.1rem;
+      border: 2px solid #eee;
+    }
+
+    .quiz-question h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1.02rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option:hover {
+      background: #e8f8f5;
+      border-color: var(--accent);
+    }
+
+    .option.selected {
+      background: #e8f8f5;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .option.correct {
+      background: #d8f3dc;
+      border-color: #2d6a4f;
+    }
+
+    .option.wrong {
+      background: #f8d7da;
+      border-color: #e76f51;
+    }
+
+    .option input { display: none; }
+
+    .result-box {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .score {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #1d7a6f;
+    }
+
+    .score-message {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #2a9d8f, #1d7a6f);
+      color: white;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .btn-retry {
+      background: linear-gradient(135deg, #48cae4, #0077b6);
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* Pumice texture illustration */
+    .texture-demo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+      background: radial-gradient(circle at 20% 30%, #e8dcc8, #c4b090);
+      border-radius: 40% 50% 45% 55%;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .texture-demo span {
+      position: absolute;
+      background: rgba(80,60,40,0.4);
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🪨 Yuk Belajar tentang Batuan Apung!</h1>
+    <p>Materi Seru untuk Anak Kelas 4 SD</p>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="nav-dots" id="navDots"></div>
+
+  <main>
+    <!-- Section 1 -->
+    <section id="sec1" class="active">
+      <h2><span class="emoji">🪨</span> Apa itu Batuan Apung?</h2>
+      <p>Halo teman-teman! Pernahkah kalian melihat batu yang <span class="highlight">bisa mengapung di air</span>?</p>
+      <p><strong>Batuan apung</strong> (bahasa Inggrisnya: <em>pumice</em>) adalah batu yang sangat istimewa. Ia terbentuk dari lava gunung berapi yang penuh gelembung gas!</p>
+
+      <div class="texture-demo" id="textureRock">
+        <span style="width:14px;height:12px;top:25px;left:30px;"></span>
+        <span style="width:10px;height:9px;top:50px;left:55px;"></span>
+        <span style="width:8px;height:8px;top:70px;left:25px;"></span>
+        <span style="width:12px;height:10px;top:40px;left:70px;"></span>
+        <span style="width:7px;height:7px;top:80px;left:60px;"></span>
+      </div>
+
+      <p style="text-align:center; font-weight:600; color:#1d7a6f;">↑ Lihat lubang-lubang kecilnya? Itu bekas gelembung gas!</p>
+
+      <div class="tip">
+        💡 <strong>Tips:</strong> Nama "apung" artinya bisa mengapung. Jadi batuan apung = batu yang bisa mengapung di air!
+      </div>
+
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="sec2">
+      <h2><span class="emoji">🌋</span> Bagaimana Batuan Apung Terbentuk?</h2>
+      <p>Batuan apung lahir dari gunung berapi. Yuk ikuti langkah-langkahnya!</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Lava penuh gas</h3>
+            <p>Di dalam gunung berapi, lava mengandung banyak gas (seperti botol soda yang digoyang).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Keluar dengan cepat</h3>
+            <p>Saat meletus, lava keluar sangat cepat. Gas-gas membentuk gelembung besar di dalam lava.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Mendingin seketika</h3>
+            <p>Lava mendingin sangat cepat di udara. Gelembung gas "terkunci" di dalam batu → terbentuk banyak lubang!</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Jadi batuan apung</h3>
+            <p>Karena penuh lubang udara, batu ini menjadi sangat ringan dan bisa mengapung.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fun">
+        🫧 Bayangkan seperti busa sabun yang mengeras! Itulah kenapa batuan apung sangat ringan.
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(1)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(3)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 3: Floating interactive -->
+    <section id="sec3">
+      <h2><span class="emoji">🌊</span> Mengapa Bisa Mengapung?</h2>
+      <p>Klik gambar di bawah untuk melihat batuan apung mengapung di air!</p>
+
+      <div class="float-demo" id="floatDemo" onclick="toggleFloat()">
+        <div class="water-surface"></div>
+        <div class="pumice-rock" id="pumiceRock"></div>
+        <div class="bubble" style="left:20%; width:12px; height:12px; animation-delay:0s;"></div>
+        <div class="bubble" style="left:40%; width:8px; height:8px; animation-delay:0.7s;"></div>
+        <div class="bubble" style="left:65%; width:14px; height:14px; animation-delay:1.4s;"></div>
+        <div class="bubble" style="left:80%; width:10px; height:10px; animation-delay:0.3s;"></div>
+      </div>
+      <p class="float-label" id="floatLabel">👆 Klik untuk melihat batu mengapung!</p>
+
+      <p>Batuan apung penuh lubang udara (pori-pori). Udara di dalam lubang membuat batu lebih ringan daripada air, jadi ia <span class="highlight">mengapung</span>!</p>
+
+      <div class="compare-weight">
+        <div class="weight-card heavy">
+          <div class="icon">🪨</div>
+          <h3>Batu Biasa</h3>
+          <p>Padat & berat.<br>Langsung tenggelam.</p>
+        </div>
+        <div class="weight-card light">
+          <div class="icon">🫧</div>
+          <h3>Batuan Apung</h3>
+          <p>Banyak lubang udara.<br>Bisa mengapung!</p>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(2)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(4)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 4: Ciri-ciri -->
+    <section id="sec4">
+      <h2><span class="emoji">🔍</span> Ciri-ciri Batuan Apung</h2>
+      <p>Klik setiap kartu untuk mengetahui ciri-cirinya!</p>
+
+      <div class="pore-box">
+        <div class="pore-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🪶</div>
+          <h3>Sangat Ringan</h3>
+          <p>Lebih ringan dari batu biasa. Bahkan bisa dibawa angin!</p>
+        </div>
+        <div class="pore-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🕳️</div>
+          <h3>Banyak Lubang</h3>
+          <p>Penuh pori-pori kecil bekas gelembung gas.</p>
+        </div>
+        <div class="pore-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🎨</div>
+          <h3>Warna Cerah</h3>
+          <p>Biasanya putih, abu-abu, atau krem kekuningan.</p>
+        </div>
+        <div class="pore-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">✋</div>
+          <h3>Kasar</h3>
+          <p>Permukaannya kasar, cocok untuk menggosok.</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        💡 Kalau kamu menemukan batu yang sangat ringan dan penuh lubang kecil di pantai atau dekat gunung berapi, kemungkinan besar itu batuan apung!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(3)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(5)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 5: Manfaat & Fakta -->
+    <section id="sec5">
+      <h2><span class="emoji">✨</span> Manfaat & Fakta Seru</h2>
+      <p>Klik setiap kartu untuk membuka fakta menariknya!</p>
+
+      <div class="fact-grid">
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🧼</div>
+          <strong>Penggosok Kulit</strong>
+          <div class="answer">Digunakan untuk menggosok kulit kasar di kaki atau tangan agar lebih halus!</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🏗️</div>
+          <strong>Bahan Bangunan</strong>
+          <div class="answer">Dicampur ke dalam beton supaya lebih ringan dan tahan gempa.</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🌱</div>
+          <strong>Media Tanam</strong>
+          <div class="answer">Digunakan di kebun karena menyimpan air dan membuat tanah lebih gembur.</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🇮🇩</div>
+          <strong>Ada di Indonesia</strong>
+          <div class="answer">Banyak ditemukan di sekitar gunung berapi, misalnya di Jawa dan Sumatera!</div>
+        </div>
+      </div>
+
+      <div class="fun" style="margin-top:1.5rem;">
+        🌟 <strong>Fakta keren:</strong> Setelah letusan gunung berapi besar, batuan apung bisa mengapung di laut berhari-hari, bahkan membentuk "pulau apung" sementara!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(4)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(6)">Kerjakan Kuis! <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 6: Quiz -->
+    <section id="sec6">
+      <h2><span class="emoji">📝</span> Kuis Seru: Seberapa Pintar Kamu?</h2>
+      <p>Pilih jawaban yang menurutmu benar. Setelah selesai, klik tombol di bawah!</p>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>1. Apa itu batuan apung?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="a"> Batu yang selalu tenggelam di air</label>
+          <label class="option"><input type="radio" name="q1" value="b"> Batu ringan yang bisa mengapung di air</label>
+          <label class="option"><input type="radio" name="q1" value="c"> Batu yang hanya ada di dasar laut</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>2. Mengapa batuan apung bisa mengapung?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="a"> Karena banyak lubang udara di dalamnya</label>
+          <label class="option"><input type="radio" name="q2" value="b"> Karena berwarna putih</label>
+          <label class="option"><input type="radio" name="q2" value="c"> Karena dibuat oleh manusia</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="c">
+        <h3>3. Dari mana batuan apung berasal?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="a"> Dari sungai</label>
+          <label class="option"><input type="radio" name="q3" value="b"> Dari es di gunung</label>
+          <label class="option"><input type="radio" name="q3" value="c"> Dari lava gunung berapi yang penuh gas</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>4. Apa manfaat batuan apung dalam kehidupan sehari-hari?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="a"> Menjadi bahan bakar mobil</label>
+          <label class="option"><input type="radio" name="q4" value="b"> Menggosok kulit dan bahan bangunan ringan</label>
+          <label class="option"><input type="radio" name="q4" value="c"> Membuat es krim</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>5. Bagaimana ciri-ciri batuan apung?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="a"> Ringan, banyak lubang, dan kasar</label>
+          <label class="option"><input type="radio" name="q5" value="b"> Berat, mengkilap, dan hitam legam</label>
+          <label class="option"><input type="radio" name="q5" value="c"> Lunak seperti tanah liat</label>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="checkQuiz()">Cek Jawaban Saya! ✅</button>
+
+      <div class="result-box" id="resultBox">
+        <div class="score" id="scoreDisplay">0/5</div>
+        <div class="score-message" id="scoreMessage"></div>
+        <button class="btn-retry" onclick="resetQuiz()">Coba Lagi 🔄</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(5)"><span>←</span> Kembali</button>
+        <div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dibuat dengan ❤️ untuk anak-anak Indonesia yang ingin tahu tentang bumi kita 🌍
+  </footer>
+
+  <script>
+    let current = 1;
+    const total = 6;
+
+    // Nav dots
+    const navDots = document.getElementById('navDots');
+    for (let i = 1; i <= total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      navDots.appendChild(dot);
+    }
+
+    function goTo(n) {
+      document.getElementById('sec' + current).classList.remove('active');
+      current = n;
+      document.getElementById('sec' + current).classList.add('active');
+      
+      document.querySelectorAll('.nav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i + 1 === current);
+      });
+
+      document.getElementById('progress').style.width = (current / total * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Floating demo
+    let isFloating = true;
+    function toggleFloat() {
+      const rock = document.getElementById('pumiceRock');
+      const label = document.getElementById('floatLabel');
+      const demo = document.getElementById('floatDemo');
+      
+      if (isFloating) {
+        rock.classList.add('sinking');
+        label.textContent = '😱 Kalau batu biasa... ia tenggelam!';
+        isFloating = false;
+      } else {
+        rock.classList.remove('sinking');
+        label.textContent = '🎉 Batuan apung mengapung lagi! Hebat!';
+        isFloating = true;
+      }
+      demo.classList.add('active');
+    }
+
+    // Fact reveal
+    function revealFact(card) {
+      card.classList.toggle('revealed');
+    }
+
+    // Quiz options
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const name = this.querySelector('input').name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+          inp.closest('.option').classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      const questions = document.querySelectorAll('.quiz-question');
+      
+      questions.forEach(q => {
+        const correct = q.dataset.correct;
+        const selected = q.querySelector('input:checked');
+        const options = q.querySelectorAll('.option');
+        
+        options.forEach(opt => {
+          opt.classList.remove('correct', 'wrong');
+          const val = opt.querySelector('input').value;
+          if (val === correct) opt.classList.add('correct');
+          if (selected && opt.querySelector('input').checked && val !== correct) {
+            opt.classList.add('wrong');
+          }
+        });
+
+        if (selected && selected.value === correct) score++;
+      });
+
+      const resultBox = document.getElementById('resultBox');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const scoreMessage = document.getElementById('scoreMessage');
+
+      scoreDisplay.textContent = score + '/5';
+      
+      if (score === 5) {
+        scoreMessage.innerHTML = '🎉 Sempurna! Kamu ahli batuan apung! Hebat sekali!';
+      } else if (score >= 3) {
+        scoreMessage.innerHTML = '👍 Bagus! Kamu sudah paham banyak tentang batuan apung!';
+      } else {
+        scoreMessage.innerHTML = '💪 Terus belajar ya! Baca lagi materinya, lalu coba ulangi kuisnya!';
+      }
+
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(inp => inp.checked = false);
+      document.getElementById('resultBox').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

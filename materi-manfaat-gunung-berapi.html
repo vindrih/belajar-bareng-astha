@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manfaat Keberadaan Gunung Berapi - Kelas 4 SD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --green: #2d6a4f;
+      --green-light: #40916c;
+      --earth: #6b4226;
+      --lava: #e63946;
+      --orange: #ff6b35;
+      --yellow: #ffbe0b;
+      --sky: #87ceeb;
+      --text: #2b2d42;
+      --card-bg: #f0fff4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', 'Comic Neue', sans-serif;
+      background: linear-gradient(180deg, #87ceeb 0%, #b7e4c7 40%, #d8f3dc 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2d6a4f, #40916c);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(45, 106, 79, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    header h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e9ecef;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #40916c, #2d6a4f);
+      transition: width 0.4s ease;
+      width: 16.6%;
+    }
+
+    .nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .nav-dot.active {
+      background: #2d6a4f;
+      transform: scale(1.3);
+      border-color: #1b4332;
+    }
+
+    .nav-dot:hover { background: #40916c; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+      border-color: #2d6a4f;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #1b4332;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .emoji { font-size: 1.7rem; }
+
+    p, li { font-size: 1.12rem; margin-bottom: 0.8rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.5rem; }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe066 0%, #ffbe0b 100%);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Benefit cards */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.3rem;
+      text-align: center;
+      border: 3px solid #d8f3dc;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      border-color: #2d6a4f;
+      box-shadow: 0 12px 25px rgba(45, 106, 79, 0.15);
+    }
+
+    .benefit-card .icon { font-size: 2.8rem; margin-bottom: 0.5rem; }
+    .benefit-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: #1b4332; }
+    .benefit-card .desc {
+      font-size: 0.95rem;
+      color: #555;
+      display: none;
+    }
+    .benefit-card.revealed .desc { display: block; animation: fadeIn 0.4s; }
+    .benefit-card.revealed {
+      border-color: #2d6a4f;
+      background: #e8f5e9;
+    }
+
+    /* Farm illustration */
+    .farm-demo {
+      width: 100%;
+      max-width: 360px;
+      height: 200px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to top, #6b8e23 0%, #87ceeb 60%);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .volcano-small {
+      position: absolute;
+      bottom: 40px;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+      border-bottom: 70px solid #6b4226;
+    }
+
+    .field {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 60%;
+      height: 50px;
+      background: repeating-linear-gradient(
+        90deg,
+        #4caf50,
+        #4caf50 15px,
+        #66bb6a 15px,
+        #66bb6a 30px
+      );
+    }
+
+    .plant {
+      position: absolute;
+      bottom: 45px;
+      font-size: 1.5rem;
+      transition: transform 0.5s;
+    }
+
+    .farm-demo:hover .plant { transform: scale(1.2); }
+
+    /* Island demo */
+    .island-demo {
+      width: 100%;
+      max-width: 340px;
+      height: 180px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to bottom, #4cc9f0, #0077b6);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .island {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.6);
+      width: 120px;
+      height: 50px;
+      background: #8b5a2b;
+      border-radius: 50% 50% 40% 40%;
+      transition: all 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+      opacity: 0.5;
+    }
+
+    .island-demo.active .island {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(139, 90, 43, 0.4);
+    }
+
+    .island::after {
+      content: '🌴';
+      position: absolute;
+      top: -25px;
+      left: 40%;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.8s 0.5s;
+    }
+
+    .island-demo.active .island::after { opacity: 1; }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 25px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50% 50% 0 0;
+    }
+
+    /* Energy */
+    .energy-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 550px) {
+      .energy-box { grid-template-columns: 1fr; }
+    }
+
+    .energy-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.3rem;
+      text-align: center;
+      border: 3px solid #ffe066;
+      transition: transform 0.3s;
+    }
+
+    .energy-card:hover { transform: translateY(-5px); }
+    .energy-card .icon { font-size: 2.8rem; margin-bottom: 0.4rem; }
+    .energy-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; color: #1b4332; }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin: 1.5rem 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: white;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      border-left: 6px solid #2d6a4f;
+      transition: transform 0.25s;
+    }
+
+    .step:hover { transform: translateX(6px); }
+
+    .step-num {
+      background: #2d6a4f;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .step-content p { font-size: 1rem; margin: 0; color: #444; }
+
+    .tip {
+      background: #e0f7fa;
+      border-left: 5px solid #00acc1;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .fun {
+      background: #fff8e7;
+      border-left: 5px solid #ffbe0b;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #40916c, #2d6a4f);
+      color: white;
+      box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(45, 106, 79, 0.4);
+    }
+
+    .btn-prev {
+      background: linear-gradient(135deg, #6c757d, #495057);
+      color: white;
+    }
+
+    .btn-prev:hover { transform: translateY(-2px); }
+
+    /* Quiz */
+    .quiz-question {
+      background: white;
+      border-radius: 16px;
+      padding: 1.4rem;
+      margin-bottom: 1.1rem;
+      border: 2px solid #eee;
+    }
+
+    .quiz-question h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1.02rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option:hover {
+      background: #e8f5e9;
+      border-color: #2d6a4f;
+    }
+
+    .option.selected {
+      background: #e8f5e9;
+      border-color: #2d6a4f;
+      font-weight: 700;
+    }
+
+    .option.correct {
+      background: #d8f3dc;
+      border-color: #2d6a4f;
+    }
+
+    .option.wrong {
+      background: #f8d7da;
+      border-color: #e63946;
+    }
+
+    .option input { display: none; }
+
+    .result-box {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .score {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #1b4332;
+    }
+
+    .score-message {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #40916c, #2d6a4f);
+      color: white;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .btn-retry {
+      background: linear-gradient(135deg, #4cc9f0, #0077b6);
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌋 Manfaat Keberadaan Gunung Berapi</h1>
+    <p>Materi Seru untuk Anak Kelas 4 SD</p>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="nav-dots" id="navDots"></div>
+
+  <main>
+    <!-- Section 1 -->
+    <section id="sec1" class="active">
+      <h2><span class="emoji">🌱</span> Gunung Berapi Tidak Hanya Berbahaya!</h2>
+      <p>Halo teman-teman! Kita sudah belajar bahwa gunung berapi bisa meletus dan berbahaya. Tapi tahukah kalian? Gunung berapi juga memberi <span class="highlight">banyak manfaat</span> bagi manusia dan bumi!</p>
+      <p>Klik setiap kartu di bawah untuk mengetahui manfaat utamanya:</p>
+
+      <div class="benefit-grid">
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🌾</div>
+          <h3>Tanah Subur</h3>
+          <div class="desc">Abu vulkanik membuat tanah sangat bagus untuk bertani.</div>
+        </div>
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🏝️</div>
+          <h3>Pulau Baru</h3>
+          <div class="desc">Lava yang mengeras di laut bisa membentuk pulau baru.</div>
+        </div>
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">⚡</div>
+          <h3>Energi Panas Bumi</h3>
+          <div class="desc">Panas dari dalam bumi bisa dipakai untuk listrik & air panas.</div>
+        </div>
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🏞️</div>
+          <h3>Pemandangan Indah</h3>
+          <div class="desc">Gunung berapi menjadi tempat wisata yang indah.</div>
+        </div>
+      </div>
+
+      <div class="fun">
+        🌟 Indonesia punya banyak gunung berapi aktif. Itu sebabnya banyak daerah pertaniannya sangat subur!
+      </div>
+
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="sec2">
+      <h2><span class="emoji">🌾</span> Tanah Menjadi Sangat Subur</h2>
+      <p>Setelah gunung meletus, abu vulkanik jatuh ke tanah. Abu ini mengandung mineral yang sangat dibutuhkan tanaman!</p>
+
+      <div class="farm-demo" title="Arahkan mouse untuk melihat tanaman tumbuh">
+        <div class="volcano-small"></div>
+        <div class="field"></div>
+        <div class="plant" style="right: 20%;">🌾</div>
+        <div class="plant" style="right: 35%;">🌽</div>
+        <div class="plant" style="right: 50%;">🥬</div>
+        <div class="plant" style="right: 10%;">🥕</div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Abu jatuh ke tanah</h3>
+            <p>Abu dari letusan menutupi lahan pertanian di sekitar gunung.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Mineral masuk ke tanah</h3>
+            <p>Abu mengandung zat-zat penting yang membuat tanah subur.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Tanaman tumbuh lebih baik</h3>
+            <p>Petani bisa menanam padi, sayur, dan buah dengan hasil lebih banyak!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip">
+        💡 Itulah sebabnya daerah di sekitar gunung berapi sering menjadi lumbung padi dan kebun yang hijau.
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(1)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(3)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="sec3">
+      <h2><span class="emoji">🏝️</span> Membentuk Pulau & Daratan Baru</h2>
+      <p>Saat lava mengalir ke laut dan mengeras, bisa muncul daratan baru. Klik gambar di bawah untuk melihat pulau terbentuk!</p>
+
+      <div class="island-demo" id="islandDemo" onclick="formIsland()">
+        <div class="island"></div>
+        <div class="wave"></div>
+      </div>
+      <p style="text-align:center; font-weight:700; color:#1b4332; margin-top:0.5rem;" id="islandLabel">👆 Klik untuk membentuk pulau baru!</p>
+
+      <p>Contoh nyata: di Hawaii dan beberapa tempat di Indonesia, pulau-pulau kecil lahir dari lava gunung berapi yang mengeras di laut.</p>
+
+      <div class="fun">
+        🌊 Lava yang dingin juga bisa memperluas pantai atau menciptakan tanjung baru.
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(2)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(4)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section id="sec4">
+      <h2><span class="emoji">⚡</span> Energi dari Panas Bumi</h2>
+      <p>Di dalam bumi dekat gunung berapi sangat panas. Manusia bisa memanfaatkan panas itu!</p>
+
+      <div class="energy-box">
+        <div class="energy-card">
+          <div class="icon">♨️</div>
+          <h3>Pemandian Air Panas</h3>
+          <p>Air panas alami dari dalam bumi. Banyak orang datang untuk berendam dan berobat.</p>
+        </div>
+        <div class="energy-card">
+          <div class="icon">💡</div>
+          <h3>Listrik Panas Bumi</h3>
+          <p>Uap panas dipakai untuk memutar turbin dan menghasilkan listrik (energi geothermal).</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        💡 Energi panas bumi termasuk energi bersih dan terbarukan. Indonesia termasuk negara yang banyak memanfaatkannya!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(3)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(5)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section id="sec5">
+      <h2><span class="emoji">✨</span> Manfaat Lainnya</h2>
+      <p>Masih ada lagi manfaat gunung berapi. Klik kartunya!</p>
+
+      <div class="benefit-grid">
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🏔️</div>
+          <h3>Tempat Wisata</h3>
+          <div class="desc">Pemandangan gunung, kawah, dan danau vulkanik sangat indah. Banyak wisatawan datang.</div>
+        </div>
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🧱</div>
+          <h3>Bahan Bangunan</h3>
+          <div class="desc">Batuan apung dan material vulkanik dipakai untuk membuat beton ringan & bahan bangunan.</div>
+        </div>
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">💎</div>
+          <h3>Mineral & Tambang</h3>
+          <div class="desc">Beberapa gunung menyimpan mineral berharga yang bisa ditambang dengan aman.</div>
+        </div>
+        <div class="benefit-card" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🔬</div>
+          <h3>Belajar Ilmu Bumi</h3>
+          <div class="desc">Ilmuwan mempelajari gunung berapi untuk memahami bumi dan memberi peringatan dini.</div>
+        </div>
+      </div>
+
+      <div class="fun" style="margin-top:1.5rem;">
+        🌟 Jadi, meskipun berbahaya saat meletus, gunung berapi juga sahabat bumi yang memberi banyak kebaikan!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(4)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(6)">Kerjakan Kuis! <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section id="sec6">
+      <h2><span class="emoji">📝</span> Kuis Seru: Seberapa Pintar Kamu?</h2>
+      <p>Pilih jawaban yang menurutmu benar. Setelah selesai, klik tombol di bawah!</p>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>1. Apa manfaat utama abu vulkanik bagi petani?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="a"> Membuat tanah menjadi tandus</label>
+          <label class="option"><input type="radio" name="q1" value="b"> Membuat tanah menjadi sangat subur</label>
+          <label class="option"><input type="radio" name="q1" value="c"> Membuat tanaman mati</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>2. Bagaimana pulau baru bisa terbentuk dari gunung berapi?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="a"> Lava mengalir ke laut lalu mengeras</label>
+          <label class="option"><input type="radio" name="q2" value="b"> Dari hujan yang sangat deras</label>
+          <label class="option"><input type="radio" name="q2" value="c"> Dari angin yang membawa debu</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="c">
+        <h3>3. Apa yang dimaksud energi panas bumi (geothermal)?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="a"> Energi dari angin</label>
+          <label class="option"><input type="radio" name="q3" value="b"> Energi dari matahari</label>
+          <label class="option"><input type="radio" name="q3" value="c"> Energi dari panas di dalam bumi</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>4. Selain pertanian, apa lagi manfaat gunung berapi?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="a"> Hanya membuat bahaya saja</label>
+          <label class="option"><input type="radio" name="q4" value="b"> Tempat wisata, bahan bangunan, dan energi listrik</label>
+          <label class="option"><input type="radio" name="q4" value="c"> Membuat cuaca selalu hujan</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>5. Mengapa Indonesia banyak daerah pertanian yang subur?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="a"> Karena banyak gunung berapi yang memberi abu subur</label>
+          <label class="option"><input type="radio" name="q5" value="b"> Karena tidak ada gunung berapi</label>
+          <label class="option"><input type="radio" name="q5" value="c"> Karena hanya ada laut</label>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="checkQuiz()">Cek Jawaban Saya! ✅</button>
+
+      <div class="result-box" id="resultBox">
+        <div class="score" id="scoreDisplay">0/5</div>
+        <div class="score-message" id="scoreMessage"></div>
+        <button class="btn-retry" onclick="resetQuiz()">Coba Lagi 🔄</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(5)"><span>←</span> Kembali</button>
+        <div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dibuat dengan ❤️ untuk anak-anak Indonesia — kenali manfaat gunung berapi di negeri kita 🌋🌱
+  </footer>
+
+  <script>
+    let current = 1;
+    const total = 6;
+
+    const navDots = document.getElementById('navDots');
+    for (let i = 1; i <= total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      navDots.appendChild(dot);
+    }
+
+    function goTo(n) {
+      document.getElementById('sec' + current).classList.remove('active');
+      current = n;
+      document.getElementById('sec' + current).classList.add('active');
+      
+      document.querySelectorAll('.nav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i + 1 === current);
+      });
+
+      document.getElementById('progress').style.width = (current / total * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function formIsland() {
+      const demo = document.getElementById('islandDemo');
+      const label = document.getElementById('islandLabel');
+      demo.classList.add('active');
+      label.textContent = '🏝️ Pulau baru terbentuk dari lava yang mengeras!';
+      setTimeout(() => {
+        demo.classList.remove('active');
+        label.textContent = '👆 Klik lagi untuk melihat sekali lagi!';
+      }, 2500);
+    }
+
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const name = this.querySelector('input').name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+          inp.closest('.option').classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      const questions = document.querySelectorAll('.quiz-question');
+      
+      questions.forEach(q => {
+        const correct = q.dataset.correct;
+        const selected = q.querySelector('input:checked');
+        const options = q.querySelectorAll('.option');
+        
+        options.forEach(opt => {
+          opt.classList.remove('correct', 'wrong');
+          const val = opt.querySelector('input').value;
+          if (val === correct) opt.classList.add('correct');
+          if (selected && opt.querySelector('input').checked && val !== correct) {
+            opt.classList.add('wrong');
+          }
+        });
+
+        if (selected && selected.value === correct) score++;
+      });
+
+      const resultBox = document.getElementById('resultBox');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const scoreMessage = document.getElementById('scoreMessage');
+
+      scoreDisplay.textContent = score + '/5';
+      
+      if (score === 5) {
+        scoreMessage.innerHTML = '🎉 Sempurna! Kamu sudah paham manfaat gunung berapi! Hebat!';
+      } else if (score >= 3) {
+        scoreMessage.innerHTML = '👍 Bagus! Kamu sudah mengerti banyak manfaat gunung berapi!';
+      } else {
+        scoreMessage.innerHTML = '💪 Terus belajar ya! Baca lagi materinya, lalu coba ulangi kuisnya!';
+      }
+
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(inp => inp.checked = false);
+      document.getElementById('resultBox').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

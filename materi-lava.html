@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar tentang Lava - Kelas 4 SD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --lava-red: #e6392b;
+      --lava-orange: #ff6b35;
+      --lava-yellow: #ffbe0b;
+      --magma: #9b2226;
+      --sky: #87ceeb;
+      --earth: #6b4226;
+      --green: #2d6a4f;
+      --card-bg: #fff8f0;
+      --text: #2b2d42;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', 'Comic Neue', sans-serif;
+      background: linear-gradient(180deg, #87ceeb 0%, #c9e4f5 40%, #e8f4e8 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--lava-red), var(--lava-orange));
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(230, 57, 43, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation dots */
+    .nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .nav-dot.active {
+      background: var(--lava-orange);
+      transform: scale(1.3);
+      border-color: var(--lava-red);
+    }
+
+    .nav-dot:hover {
+      background: var(--lava-yellow);
+    }
+
+    /* Main container */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      transition: all 0.4s ease;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+      border-color: var(--lava-orange);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: var(--lava-red);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .emoji {
+      font-size: 1.8rem;
+    }
+
+    p, li {
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe066 0%, #ffbe0b 100%);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Volcano visual */
+    .volcano-container {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+      height: 300px;
+      margin: 1.5rem auto;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .volcano-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      height: 200px;
+      background: linear-gradient(to top, #5a3a1e, #8b5a2b 40%, #a67c52);
+      clip-path: polygon(10% 100%, 90% 100%, 70% 15%, 30% 15%);
+      z-index: 2;
+    }
+
+    .volcano-body::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 30px;
+      background: #3d2314;
+      border-radius: 50% 50% 0 0;
+      z-index: 3;
+    }
+
+    .crater {
+      position: absolute;
+      bottom: 185px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 30px;
+      background: #2a180f;
+      border-radius: 50%;
+      z-index: 4;
+      box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .lava-pool {
+      position: absolute;
+      bottom: 188px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 18px;
+      background: radial-gradient(circle, var(--lava-yellow), var(--lava-orange), var(--lava-red));
+      border-radius: 50%;
+      z-index: 5;
+      opacity: 0.9;
+      box-shadow: 0 0 15px var(--lava-orange);
+      transition: all 0.3s;
+    }
+
+    .lava-stream {
+      position: absolute;
+      bottom: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 0;
+      background: linear-gradient(to top, var(--lava-red), var(--lava-orange), var(--lava-yellow));
+      border-radius: 15px 15px 0 0;
+      z-index: 3;
+      transition: height 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 25px var(--lava-orange), 0 0 50px var(--lava-red);
+    }
+
+    .volcano-container.erupting .lava-stream {
+      height: 140px;
+    }
+
+    .volcano-container.erupting .lava-pool {
+      width: 75px;
+      height: 25px;
+      box-shadow: 0 0 30px var(--lava-yellow), 0 0 60px var(--lava-orange);
+    }
+
+    .smoke {
+      position: absolute;
+      bottom: 220px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, rgba(120,120,120,0.6), transparent);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .volcano-container.erupting .smoke {
+      opacity: 1;
+      animation: smokeRise 1.8s ease-out infinite;
+    }
+
+    .smoke2 {
+      position: absolute;
+      bottom: 230px;
+      left: 45%;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, rgba(100,100,100,0.5), transparent);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .volcano-container.erupting .smoke2 {
+      opacity: 1;
+      animation: smokeRise 2.2s ease-out 0.3s infinite;
+    }
+
+    @keyframes smokeRise {
+      0% { transform: translateY(0) scale(0.8); opacity: 0.7; }
+      100% { transform: translateY(-100px) scale(2.2); opacity: 0; }
+    }
+
+    .spark {
+      position: absolute;
+      bottom: 210px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--lava-yellow);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 6;
+      box-shadow: 0 0 10px var(--lava-yellow);
+    }
+
+    .volcano-container.erupting .spark {
+      animation: sparkFly 0.9s ease-out infinite;
+    }
+
+    .spark:nth-child(1) { left: 45%; animation-delay: 0s; }
+    .spark:nth-child(2) { left: 55%; animation-delay: 0.2s; }
+    .spark:nth-child(3) { left: 48%; animation-delay: 0.4s; }
+
+    @keyframes sparkFly {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-80px) translateX(20px) scale(0); opacity: 0; }
+    }
+
+    .eruption-text {
+      text-align: center;
+      font-weight: 700;
+      color: var(--lava-red);
+      font-size: 1.15rem;
+      margin-top: 0.5rem;
+      min-height: 1.5rem;
+    }
+
+    /* Lava flow animation */
+    .lava-flow {
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(90deg, 
+        var(--lava-red) 0%, 
+        var(--lava-orange) 25%, 
+        var(--lava-yellow) 50%, 
+        var(--lava-orange) 75%, 
+        var(--lava-red) 100%);
+      background-size: 200% 100%;
+      border-radius: 40px;
+      margin: 1.5rem 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(255, 107, 53, 0.6);
+      animation: flow 3s linear infinite;
+    }
+
+    @keyframes flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .lava-flow::after {
+      content: '🔥 LAVA MENGGALIR 🔥';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      white-space: nowrap;
+    }
+
+    /* Cards comparison */
+    .compare-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .compare-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .compare-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 3px solid #eee;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .compare-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .compare-card.magma {
+      border-color: var(--magma);
+    }
+
+    .compare-card.lava {
+      border-color: var(--lava-orange);
+    }
+
+    .compare-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .compare-card .icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Fun facts */
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .fact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px dashed var(--lava-orange);
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fact-card:hover {
+      background: #fff5e6;
+      transform: scale(1.03);
+    }
+
+    .fact-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .fact-card .answer {
+      display: none;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed #ddd;
+      font-size: 1rem;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .fact-card.revealed .answer {
+      display: block;
+      animation: fadeIn 0.4s;
+    }
+
+    .fact-card.revealed {
+      border-style: solid;
+      background: #e8f8e8;
+    }
+
+    /* Interactive temperature */
+    .temp-slider-box {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .temp-display {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--lava-red);
+      margin: 0.5rem 0;
+    }
+
+    .temp-label {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    input[type="range"] {
+      width: 80%;
+      max-width: 300px;
+      height: 12px;
+      -webkit-appearance: none;
+      background: linear-gradient(90deg, #4cc9f0, #ffbe0b, #e6392b);
+      border-radius: 10px;
+      outline: none;
+      margin: 1rem 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      background: white;
+      border: 4px solid var(--lava-red);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Navigation buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-next, .btn-prev {
+      background: linear-gradient(135deg, var(--lava-orange), var(--lava-red));
+      color: white;
+      box-shadow: 0 4px 15px rgba(230, 57, 43, 0.3);
+    }
+
+    .btn-next:hover, .btn-prev:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 57, 43, 0.4);
+    }
+
+    .btn-prev {
+      background: linear-gradient(135deg, #6c757d, #495057);
+    }
+
+    /* Quiz styles */
+    .quiz-question {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.2rem;
+      border: 2px solid #eee;
+    }
+
+    .quiz-question h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1.05rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option:hover {
+      background: #fff3e0;
+      border-color: var(--lava-orange);
+    }
+
+    .option.selected {
+      background: #fff3e0;
+      border-color: var(--lava-orange);
+      font-weight: 700;
+    }
+
+    .option.correct {
+      background: #d8f3dc;
+      border-color: #2d6a4f;
+    }
+
+    .option.wrong {
+      background: #f8d7da;
+      border-color: #e6392b;
+    }
+
+    .option input {
+      display: none;
+    }
+
+    .result-box {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .score {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--lava-red);
+    }
+
+    .score-message {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--green), #40916c);
+      color: white;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .btn-retry {
+      background: linear-gradient(135deg, #4cc9f0, #4361ee);
+      color: white;
+    }
+
+    /* Progress */
+    .progress-bar {
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 10px;
+      margin: 0 1rem 1rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--lava-orange), var(--lava-red));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+      width: 20%;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    .tip {
+      background: #e7f5ff;
+      border-left: 5px solid #4cc9f0;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .warning {
+      background: #fff3e0;
+      border-left: 5px solid var(--lava-orange);
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌋 Yuk Belajar tentang Lava!</h1>
+    <p>Materi Seru untuk Anak Kelas 4 SD</p>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="nav-dots" id="navDots"></div>
+
+  <main>
+    <!-- Section 1: Apa itu Lava -->
+    <section id="sec1" class="active">
+      <h2><span class="emoji">🔥</span> Apa itu Lava?</h2>
+      <p>Halo teman-teman! Tahukah kalian apa itu <span class="highlight">lava</span>?</p>
+      <p><strong>Lava</strong> adalah <strong>batu yang meleleh</strong> karena sangat-sangat panas! Batu ini keluar dari dalam bumi lewat gunung berapi.</p>
+      
+      <div class="lava-flow"></div>
+      
+      <p>Bayangkan seperti es krim yang meleleh di panas matahari. Tapi lava jauh lebih panas! Suhu lava bisa mencapai <span class="highlight">700°C sampai 1200°C</span>. Itu lebih panas dari oven di rumah!</p>
+      
+      <div class="tip">
+        💡 <strong>Tips:</strong> Kalau kamu memegang es batu, tanganmu dingin. Kalau mendekati lava... tanganmu bisa terbakar! Jadi jangan pernah mendekati lava sungguhan ya!
+      </div>
+
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 2: Magma vs Lava -->
+    <section id="sec2">
+      <h2><span class="emoji">🌋</span> Magma dan Lava, Apa Bedanya?</h2>
+      <p>Banyak yang bingung antara <strong>magma</strong> dan <strong>lava</strong>. Padahal bedanya sederhana!</p>
+      
+      <div class="compare-box">
+        <div class="compare-card magma">
+          <div class="icon">🪨</div>
+          <h3>Magma</h3>
+          <p>Batu meleleh yang masih <strong>di dalam bumi</strong>.</p>
+          <p>Seperti air yang masih di dalam panci tertutup.</p>
+        </div>
+        <div class="compare-card lava">
+          <div class="icon">🔥</div>
+          <h3>Lava</h3>
+          <p>Batu meleleh yang sudah <strong>keluar ke permukaan bumi</strong>.</p>
+          <p>Seperti air yang tumpah dari panci!</p>
+        </div>
+      </div>
+
+      <p style="text-align:center; font-weight:700; font-size:1.2rem; margin:1rem 0;">
+        Magma di dalam → Keluar → Jadi Lava! 🎯
+      </p>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(1)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(3)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 3: Gunung Berapi Interaktif -->
+    <section id="sec3">
+      <h2><span class="emoji">💥</span> Bagaimana Lava Keluar?</h2>
+      <p>Klik gambar gunung berapi di bawah ini untuk melihat bagaimana lava keluar!</p>
+      
+      <div class="volcano-container" id="volcano" onclick="erupt()">
+        <div class="smoke"></div>
+        <div class="smoke2"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="lava-stream"></div>
+        <div class="lava-pool"></div>
+        <div class="crater"></div>
+        <div class="volcano-body"></div>
+      </div>
+      <p class="eruption-text" id="eruptText">👆 Klik gunungnya untuk meletus!</p>
+
+      <p>Ketika tekanan di dalam bumi sangat besar, magma mendorong keluar lewat lubang gunung berapi. Saat keluar, namanya berubah menjadi <span class="highlight">lava</span>.</p>
+      
+      <div class="warning">
+        ⚠️ <strong>Penting!</strong> Jangan pernah bermain di dekat gunung berapi yang aktif. Lava sangat berbahaya!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(2)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(4)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 4: Suhu Lava Interaktif -->
+    <section id="sec4">
+      <h2><span class="emoji">🌡️</span> Seberapa Panas Lava?</h2>
+      <p>Geser pengatur di bawah untuk melihat perbandingan suhu!</p>
+      
+      <div class="temp-slider-box">
+        <div class="temp-label">Suhu yang kamu pilih:</div>
+        <div class="temp-display" id="tempValue">100°C</div>
+        <input type="range" id="tempSlider" min="0" max="1200" value="100" step="50">
+        <div id="tempDesc" style="margin-top:0.8rem; font-weight:600; font-size:1.1rem;">
+          Air mendidih 💧
+        </div>
+      </div>
+
+      <ul>
+        <li>Air mendidih: sekitar <strong>100°C</strong></li>
+        <li>Oven rumah: sekitar <strong>200–250°C</strong></li>
+        <li>Lava paling dingin: sekitar <strong>700°C</strong></li>
+        <li>Lava paling panas: sampai <strong>1200°C</strong>!</li>
+      </ul>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(3)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(5)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 5: Fakta Menarik -->
+    <section id="sec5">
+      <h2><span class="emoji">✨</span> Fakta Seru tentang Lava!</h2>
+      <p>Klik setiap kartu untuk membuka fakta menariknya!</p>
+      
+      <div class="fact-grid">
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🏝️</div>
+          <strong>Pulau Baru?</strong>
+          <div class="answer">Ya! Lava yang mengeras di laut bisa membentuk pulau baru. Contohnya di Hawaii!</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🪨</div>
+          <strong>Batu Vulkanik</strong>
+          <div class="answer">Ketika lava dingin dan mengeras, ia menjadi batu baru yang disebut batuan vulkanik.</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">⚡</div>
+          <strong>Berapa Cepat?</strong>
+          <div class="answer">Lava bisa mengalir lambat seperti madu kental, atau cepat sampai 60 km/jam!</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🌍</div>
+          <strong>Di Mana?</strong>
+          <div class="answer">Indonesia punya banyak gunung berapi aktif, salah satunya Gunung Merapi!</div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(4)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(6)">Kerjakan Kuis! <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 6: Kuis -->
+    <section id="sec6">
+      <h2><span class="emoji">📝</span> Kuis Seru: Seberapa Pintar Kamu?</h2>
+      <p>Pilih jawaban yang menurutmu benar. Setelah selesai, klik tombol di bawah!</p>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>1. Apa itu lava?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="a"> Air yang sangat panas dari sungai</label>
+          <label class="option"><input type="radio" name="q1" value="b"> Batu yang meleleh dan keluar dari gunung berapi</label>
+          <label class="option"><input type="radio" name="q1" value="c"> Es yang mencair di kutub</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>2. Apa perbedaan magma dan lava?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="a"> Magma di dalam bumi, lava sudah keluar ke permukaan</label>
+          <label class="option"><input type="radio" name="q2" value="b"> Tidak ada perbedaan, sama saja</label>
+          <label class="option"><input type="radio" name="q2" value="c"> Lava lebih dingin daripada magma</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="c">
+        <h3>3. Berapa kira-kira suhu lava yang paling panas?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="a"> 100°C (seperti air mendidih)</label>
+          <label class="option"><input type="radio" name="q3" value="b"> 250°C (seperti oven)</label>
+          <label class="option"><input type="radio" name="q3" value="c"> Sampai 1200°C</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>4. Apa yang terjadi jika lava mengalir ke laut dan mengeras?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="a"> Menjadi es</label>
+          <label class="option"><input type="radio" name="q4" value="b"> Bisa membentuk pulau baru</label>
+          <label class="option"><input type="radio" name="q4" value="c"> Hilang begitu saja</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>5. Mengapa kita tidak boleh mendekati lava?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="a"> Karena sangat panas dan berbahaya</label>
+          <label class="option"><input type="radio" name="q5" value="b"> Karena baunya tidak enak</label>
+          <label class="option"><input type="radio" name="q5" value="c"> Karena warnanya jelek</label>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="checkQuiz()">Cek Jawaban Saya! ✅</button>
+
+      <div class="result-box" id="resultBox">
+        <div class="score" id="scoreDisplay">0/5</div>
+        <div class="score-message" id="scoreMessage"></div>
+        <button class="btn-retry" onclick="resetQuiz()">Coba Lagi 🔄</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(5)"><span>←</span> Kembali</button>
+        <div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dibuat dengan ❤️ untuk anak-anak Indonesia yang ingin tahu tentang bumi kita 🌍
+  </footer>
+
+  <script>
+    let current = 1;
+    const total = 6;
+
+    // Build nav dots
+    const navDots = document.getElementById('navDots');
+    for (let i = 1; i <= total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      navDots.appendChild(dot);
+    }
+
+    function goTo(n) {
+      document.getElementById('sec' + current).classList.remove('active');
+      current = n;
+      document.getElementById('sec' + current).classList.add('active');
+      
+      // Update dots
+      document.querySelectorAll('.nav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i + 1 === current);
+      });
+
+      // Update progress
+      document.getElementById('progress').style.width = (current / total * 100) + '%';
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Volcano eruption
+    function erupt() {
+      const vol = document.getElementById('volcano');
+      const text = document.getElementById('eruptText');
+      vol.classList.add('erupting');
+      text.textContent = '💥 BOOM! Lava keluar dari gunung!';
+      
+      setTimeout(() => {
+        vol.classList.remove('erupting');
+        text.textContent = '👆 Klik lagi untuk meletus lagi!';
+      }, 2500);
+    }
+
+    // Temperature slider
+    const slider = document.getElementById('tempSlider');
+    const tempValue = document.getElementById('tempValue');
+    const tempDesc = document.getElementById('tempDesc');
+
+    const descriptions = [
+      { max: 50, text: 'Dingin sekali ❄️', color: '#4cc9f0' },
+      { max: 100, text: 'Air mendidih 💧', color: '#4cc9f0' },
+      { max: 250, text: 'Seperti oven rumah 🍞', color: '#ffbe0b' },
+      { max: 600, text: 'Sangat panas! Hampir seperti lava 🔥', color: '#ff6b35' },
+      { max: 900, text: 'Suhu lava yang lebih dingin 🌋', color: '#e6392b' },
+      { max: 1200, text: 'Lava super panas!!! 🔥🔥🔥', color: '#9b2226' }
+    ];
+
+    slider.addEventListener('input', () => {
+      const val = parseInt(slider.value);
+      tempValue.textContent = val + '°C';
+      
+      for (let d of descriptions) {
+        if (val <= d.max) {
+          tempDesc.textContent = d.text;
+          tempValue.style.color = d.color;
+          break;
+        }
+      }
+    });
+
+    // Fact reveal
+    function revealFact(card) {
+      card.classList.toggle('revealed');
+    }
+
+    // Quiz
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const name = this.querySelector('input').name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+          inp.closest('.option').classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      const questions = document.querySelectorAll('.quiz-question');
+      
+      questions.forEach(q => {
+        const correct = q.dataset.correct;
+        const selected = q.querySelector('input:checked');
+        const options = q.querySelectorAll('.option');
+        
+        options.forEach(opt => {
+          opt.classList.remove('correct', 'wrong');
+          const val = opt.querySelector('input').value;
+          if (val === correct) {
+            opt.classList.add('correct');
+          }
+          if (selected && opt.querySelector('input').checked && val !== correct) {
+            opt.classList.add('wrong');
+          }
+        });
+
+        if (selected && selected.value === correct) {
+          score++;
+        }
+      });
+
+      const resultBox = document.getElementById('resultBox');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const scoreMessage = document.getElementById('scoreMessage');
+
+      scoreDisplay.textContent = score + '/5';
+      
+      if (score === 5) {
+        scoreMessage.innerHTML = '🎉 Sempurna! Kamu ahli lava! Hebat sekali!';
+      } else if (score >= 3) {
+        scoreMessage.innerHTML = '👍 Bagus! Kamu sudah paham banyak tentang lava!';
+      } else {
+        scoreMessage.innerHTML = '💪 Terus belajar ya! Coba baca lagi materi di atas, lalu ulangi kuisnya!';
+      }
+
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(inp => inp.checked = false);
+      document.getElementById('resultBox').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

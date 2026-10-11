@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astha Belajar Seru – Materi Interaktif untuk Anak</title>
+  <meta name="description" content="Astha Belajar Seru – Platform belajar interaktif untuk anak SD. Materi Gunung Berapi, Matematika, Bahasa Inggris, IPA, dan lainnya.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --text: #1e293b;
+      --card: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(165deg, #e0e7ff 0%, #fce7f3 40%, #ecfdf5 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      color: white;
+      text-align: center;
+      padding: 2.2rem 1.5rem 1.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .logo {
+      font-size: 2.4rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+      letter-spacing: -0.5px;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      margin-top: 0.4rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      padding: 0.35rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    .intro {
+      background: white;
+      border-radius: 20px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      text-align: center;
+      border: 3px solid #c4b5fd;
+    }
+
+    .intro p { font-size: 1.1rem; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin: 2rem 0 1.2rem;
+      color: #5b21b6;
+    }
+
+    .section-title span { font-size: 1.6rem; }
+
+    .subjects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      border: 3px solid #e2e8f0;
+      transition: all 0.25s;
+    }
+
+    .subject.active {
+      border-color: #7c3aed;
+      background: #f5f3ff;
+      box-shadow: 0 6px 18px rgba(124, 58, 237, 0.15);
+    }
+
+    .subject.coming { opacity: 0.65; }
+
+    .subject .icon {
+      font-size: 2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .subject h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .subject .status {
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+
+    .subject.active .status { color: #7c3aed; }
+    .subject.coming .status { color: #94a3b8; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.11);
+    }
+
+    .card.lava { border-color: #e63946; }
+    .card.pumice { border-color: #0d9488; }
+    .card.cloud { border-color: #4f46e5; }
+    .card.hotcloud { border-color: #ea580c; }
+    .card.erupt { border-color: #b91c1c; }
+    .card.benefit { border-color: #059669; }
+
+    .card .emoji {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.45rem;
+      font-weight: 800;
+    }
+
+    .card.lava h2 { color: #e63946; }
+    .card.pumice h2 { color: #0d9488; }
+    .card.cloud h2 { color: #4f46e5; }
+    .card.hotcloud h2 { color: #ea580c; }
+    .card.erupt h2 { color: #b91c1c; }
+    .card.benefit h2 { color: #059669; }
+
+    .card p {
+      font-size: 1rem;
+      color: #64748b;
+      flex-grow: 1;
+    }
+
+    .card .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: white;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover .btn { transform: scale(1.05); }
+
+    .card.lava .btn { background: linear-gradient(135deg, #e63946, #9b2226); }
+    .card.pumice .btn { background: linear-gradient(135deg, #0d9488, #0f766e); }
+    .card.cloud .btn { background: linear-gradient(135deg, #4f46e5, #3730a3); }
+    .card.hotcloud .btn { background: linear-gradient(135deg, #ea580c, #c2410c); }
+    .card.erupt .btn { background: linear-gradient(135deg, #b91c1c, #7f1d1d); }
+    .card.benefit .btn { background: linear-gradient(135deg, #059669, #047857); }
+
+    .order {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: #f1f5f9;
+      color: #64748b;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .coming-soon {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 2px dashed #c4b5fd;
+      margin-top: 2.5rem;
+      color: #64748b;
+    }
+
+    .coming-soon h3 {
+      font-size: 1.15rem;
+      color: #5b21b6;
+      margin-bottom: 0.4rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    footer strong { color: #7c3aed; }
+
+    @media (max-width: 500px) {
+      .logo { font-size: 1.9rem; }
+      .grid { grid-template-columns: 1fr; }
+      .subjects { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🌟 Astha Belajar Seru</div>
+    <p class="tagline">Belajar jadi lebih seru & interaktif!</p>
+    <div class="badge">Untuk Anak SD • Animasi • Kuis</div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p>Halo! Selamat datang di <strong>Astha Belajar Seru</strong>.</p>
+      <p>Pilih mata pelajaran di bawah, lalu mulai petualangan belajarmu 🚀</p>
+    </div>
+
+    <div class="section-title">
+      <span>📚</span> Mata Pelajaran
+    </div>
+
+    <div class="subjects">
+      <div class="subject active">
+        <div class="icon">🌋</div>
+        <h3>IPA – Gunung Berapi</h3>
+        <div class="status">✓ Tersedia</div>
+      </div>
+      <div class="subject coming">
+        <div class="icon">🔢</div>
+        <h3>Matematika</h3>
+        <div class="status">Segera hadir</div>
+      </div>
+      <div class="subject coming">
+        <div class="icon">🔤</div>
+        <h3>Bahasa Inggris</h3>
+        <div class="status">Segera hadir</div>
+      </div>
+      <div class="subject coming">
+        <div class="icon">🔬</div>
+        <h3>IPA Lainnya</h3>
+        <div class="status">Segera hadir</div>
+      </div>
+      <div class="subject coming">
+        <div class="icon">📖</div>
+        <h3>Bahasa Indonesia</h3>
+        <div class="status">Segera hadir</div>
+      </div>
+      <div class="subject coming">
+        <div class="icon">🌍</div>
+        <h3>IPS</h3>
+        <div class="status">Segera hadir</div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <span>🌋</span> IPA – Gunung Berapi
+    </div>
+
+    <div class="grid">
+      <a href="materi-lava.html" class="card lava">
+        <span class="order">1</span>
+        <div class="emoji">🔥</div>
+        <h2>Lava</h2>
+        <p>Apa itu lava? Bedanya dengan magma, seberapa panas, dan bagaimana keluar dari gunung.</p>
+        <span class="btn">Mulai Belajar →</span>
+      </a>
+
+      <a href="materi-batuan-apung.html" class="card pumice">
+        <span class="order">2</span>
+        <div class="emoji">🪨</div>
+        <h2>Batuan Apung</h2>
+        <p>Batu unik yang bisa mengapung di air! Bagaimana terbentuk dan manfaatnya.</p>
+        <span class="btn">Mulai Belajar →</span>
+      </a>
+
+      <a href="materi-awan-udara-panas.html" class="card cloud">
+        <span class="order">3</span>
+        <div class="emoji">☁️</div>
+        <h2>Awan & Udara Panas</h2>
+        <p>Mengapa udara panas naik? Bagaimana awan terbentuk? Yuk pelajari!</p>
+        <span class="btn">Mulai Belajar →</span>
+      </a>
+
+      <a href="materi-awan-panas.html" class="card hotcloud">
+        <span class="order">4</span>
+        <div class="emoji">🌋☁️</div>
+        <h2>Awan Panas</h2>
+        <p>Awan berbahaya dari letusan gunung berapi. Apa bedanya dengan awan biasa?</p>
+        <span class="btn">Mulai Belajar →</span>
+      </a>
+
+      <a href="materi-gunung-meletus.html" class="card erupt">
+        <span class="order">5</span>
+        <div class="emoji">💥</div>
+        <h2>Gunung Meletus</h2>
+        <p>Apa yang terjadi saat gunung berapi meletus? Langkah-langkah dan isinya.</p>
+        <span class="btn">Mulai Belajar →</span>
+      </a>
+
+      <a href="materi-manfaat-gunung-berapi.html" class="card benefit">
+        <span class="order">6</span>
+        <div class="emoji">🌱</div>
+        <h2>Manfaat Gunung Berapi</h2>
+        <p>Tanah subur, pulau baru, energi panas bumi, dan manfaat lainnya.</p>
+        <span class="btn">Mulai Belajar →</span>
+      </a>
+    </div>
+
+    <div class="coming-soon">
+      <h3>🚀 Materi Baru Segera Hadir!</h3>
+      <p>Matematika • Bahasa Inggris • IPA • Bahasa Indonesia • IPS dan masih banyak lagi.</p>
+      <p style="margin-top:0.5rem; font-size:0.95rem;">Pantau terus <strong>Astha Belajar Seru</strong> ya!</p>
+    </div>
+  </main>
+
+  <footer>
+    <p><strong>Astha Belajar Seru</strong></p>
+    <p style="margin-top:0.3rem;">Belajar jadi lebih seru & interaktif untuk anak Indonesia 💜</p>
+  </footer>
+</body>
+</html>

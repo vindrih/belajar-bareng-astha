@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar tentang Awan & Udara Panas - Kelas 4 SD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --sky: #4cc9f0;
+      --sky-dark: #4361ee;
+      --cloud: #f8f9fa;
+      --sun: #ffbe0b;
+      --warm: #ff6b35;
+      --cool: #48cae4;
+      --text: #2b2d42;
+      --card-bg: #f0f9ff;
+      --green: #2d6a4f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', 'Comic Neue', sans-serif;
+      background: linear-gradient(180deg, #4cc9f0 0%, #90e0ef 40%, #caf0f8 70%, #e8f5e9 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4361ee, #4cc9f0);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(67, 97, 238, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e9ecef;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4cc9f0, #4361ee);
+      transition: width 0.4s ease;
+      width: 16.6%;
+    }
+
+    .nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .nav-dot.active {
+      background: #4361ee;
+      transform: scale(1.3);
+      border-color: #3a0ca3;
+    }
+
+    .nav-dot:hover { background: #4cc9f0; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 3px solid transparent;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+      border-color: #4361ee;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #3a0ca3;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .emoji { font-size: 1.7rem; }
+
+    p, li { font-size: 1.12rem; margin-bottom: 0.8rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.5rem; }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe066 0%, #ffbe0b 100%);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Hot air rising animation */
+    .rise-demo {
+      width: 100%;
+      max-width: 340px;
+      height: 260px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to top, #ff6b35 0%, #ffbe0b 25%, #90e0ef 60%, #4cc9f0 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
+    }
+
+    .ground {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 40px;
+      background: #6b8e23;
+      z-index: 2;
+    }
+
+    .sun {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #fff200, #ffbe0b);
+      border-radius: 50%;
+      box-shadow: 0 0 30px #ffbe0b;
+      z-index: 1;
+    }
+
+    .air-particle {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: rgba(255, 100, 50, 0.7);
+      border-radius: 50%;
+      bottom: 45px;
+      opacity: 0.8;
+      transition: all 1.5s ease-out;
+    }
+
+    .rise-demo.active .air-particle {
+      bottom: 200px;
+      opacity: 0.2;
+      transform: scale(1.5);
+    }
+
+    .air-particle:nth-child(2) { left: 30%; transition-delay: 0.2s; }
+    .air-particle:nth-child(3) { left: 50%; transition-delay: 0.4s; background: rgba(255,150,50,0.7); }
+    .air-particle:nth-child(4) { left: 70%; transition-delay: 0.1s; }
+    .air-particle:nth-child(5) { left: 45%; transition-delay: 0.6s; width: 14px; height: 14px; }
+
+    .rise-label {
+      text-align: center;
+      font-weight: 700;
+      color: #3a0ca3;
+      font-size: 1.05rem;
+      margin-top: 0.6rem;
+      min-height: 1.4rem;
+    }
+
+    /* Balloon */
+    .balloon-demo {
+      width: 100%;
+      max-width: 300px;
+      height: 280px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to bottom, #4cc9f0, #90e0ef);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .balloon {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 30px;
+      transition: bottom 1.8s cubic-bezier(0.34, 1.3, 0.64, 1);
+      z-index: 3;
+    }
+
+    .balloon-body {
+      width: 70px;
+      height: 85px;
+      background: linear-gradient(135deg, #e63946, #ff6b35);
+      border-radius: 50% 50% 45% 45%;
+      position: relative;
+      box-shadow: inset -8px -5px 15px rgba(0,0,0,0.2);
+    }
+
+    .balloon-body::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 12px;
+      background: #c1121f;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .basket {
+      width: 28px;
+      height: 18px;
+      background: #8b5a2b;
+      margin: 12px auto 0;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .basket::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 4px;
+      width: 2px;
+      height: 14px;
+      background: #5a3a1e;
+      box-shadow: 18px 0 0 #5a3a1e;
+    }
+
+    .balloon-demo.flying .balloon {
+      bottom: 160px;
+    }
+
+    .cloud-small {
+      position: absolute;
+      background: white;
+      border-radius: 50px;
+      opacity: 0.9;
+    }
+
+    /* Cloud formation */
+    .cloud-form {
+      width: 100%;
+      max-width: 360px;
+      height: 200px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to top, #90e0ef, #4cc9f0);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .vapor {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 20px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      transition: all 1.2s ease;
+      opacity: 0.6;
+    }
+
+    .cloud-form.active .vapor {
+      bottom: 100px;
+      width: 120px;
+      height: 50px;
+      opacity: 1;
+      background: white;
+      box-shadow: -30px 10px 0 -5px white, 35px 5px 0 -8px white, 0 -15px 0 -5px white;
+    }
+
+    .form-label {
+      text-align: center;
+      font-weight: 700;
+      color: #3a0ca3;
+      margin-top: 0.5rem;
+      min-height: 1.4rem;
+    }
+
+    /* Cloud types */
+    .cloud-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .cloud-type {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 3px solid #e0e7ff;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .cloud-type:hover, .cloud-type.revealed {
+      border-color: #4361ee;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(67,97,238,0.15);
+    }
+
+    .cloud-type .icon { font-size: 2.8rem; margin-bottom: 0.4rem; }
+    .cloud-type h3 { font-size: 1.05rem; margin-bottom: 0.3rem; color: #3a0ca3; }
+    .cloud-type .desc {
+      font-size: 0.95rem;
+      color: #555;
+      display: none;
+    }
+    .cloud-type.revealed .desc { display: block; animation: fadeIn 0.4s; }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin: 1.5rem 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: white;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      border-left: 6px solid #4361ee;
+      transition: transform 0.25s;
+    }
+
+    .step:hover { transform: translateX(6px); }
+
+    .step-num {
+      background: #4361ee;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .step-content p { font-size: 1rem; margin: 0; color: #444; }
+
+    /* Fact cards */
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .fact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px dashed #4361ee;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .fact-card:hover {
+      background: #eef2ff;
+      transform: scale(1.03);
+    }
+
+    .fact-card .icon { font-size: 2.4rem; margin-bottom: 0.4rem; }
+    .fact-card .answer {
+      display: none;
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed #ccc;
+      font-size: 0.98rem;
+      color: #3a0ca3;
+      font-weight: 600;
+    }
+
+    .fact-card.revealed .answer { display: block; animation: fadeIn 0.4s; }
+    .fact-card.revealed {
+      border-style: solid;
+      background: #eef2ff;
+    }
+
+    .tip {
+      background: #e0f7fa;
+      border-left: 5px solid #00acc1;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .fun {
+      background: #fff8e7;
+      border-left: 5px solid #ffbe0b;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #4361ee, #3a0ca3);
+      color: white;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .btn-prev {
+      background: linear-gradient(135deg, #6c757d, #495057);
+      color: white;
+    }
+
+    .btn-prev:hover { transform: translateY(-2px); }
+
+    /* Quiz */
+    .quiz-question {
+      background: white;
+      border-radius: 16px;
+      padding: 1.4rem;
+      margin-bottom: 1.1rem;
+      border: 2px solid #eee;
+    }
+
+    .quiz-question h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1.02rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option:hover {
+      background: #eef2ff;
+      border-color: #4361ee;
+    }
+
+    .option.selected {
+      background: #eef2ff;
+      border-color: #4361ee;
+      font-weight: 700;
+    }
+
+    .option.correct {
+      background: #d8f3dc;
+      border-color: #2d6a4f;
+    }
+
+    .option.wrong {
+      background: #f8d7da;
+      border-color: #e63946;
+    }
+
+    .option input { display: none; }
+
+    .result-box {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .score {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #3a0ca3;
+    }
+
+    .score-message {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #4361ee, #3a0ca3);
+      color: white;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .btn-retry {
+      background: linear-gradient(135deg, #4cc9f0, #0077b6);
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>☁️ Yuk Belajar tentang Awan & Udara Panas!</h1>
+    <p>Materi Seru untuk Anak Kelas 4 SD</p>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="nav-dots" id="navDots"></div>
+
+  <main>
+    <!-- Section 1 -->
+    <section id="sec1" class="active">
+      <h2><span class="emoji">🌡️</span> Apa itu Udara Panas?</h2>
+      <p>Halo teman-teman! Udara ada di mana-mana, meskipun kita tidak bisa melihatnya. Tapi udara bisa <span class="highlight">panas</span> atau <span class="highlight">dingin</span>.</p>
+      <p>Saat matahari menyinari tanah, tanah menjadi hangat. Tanah yang hangat memanaskan udara di atasnya. Itulah <strong>udara panas</strong>!</p>
+
+      <div class="rise-demo" id="riseDemo" onclick="riseAir()">
+        <div class="sun"></div>
+        <div class="air-particle" style="left:25%"></div>
+        <div class="air-particle"></div>
+        <div class="air-particle"></div>
+        <div class="air-particle"></div>
+        <div class="air-particle"></div>
+        <div class="ground"></div>
+      </div>
+      <p class="rise-label" id="riseLabel">👆 Klik untuk melihat udara panas naik!</p>
+
+      <div class="tip">
+        💡 <strong>Ingat:</strong> Udara panas lebih ringan daripada udara dingin, jadi ia naik ke atas seperti balon!
+      </div>
+
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="sec2">
+      <h2><span class="emoji">🎈</span> Mengapa Udara Panas Naik?</h2>
+      <p>Bayangkan balon udara panas! Di dalamnya ada udara yang dipanaskan. Karena lebih ringan, balon naik ke langit.</p>
+
+      <div class="balloon-demo" id="balloonDemo" onclick="flyBalloon()">
+        <div class="cloud-small" style="width:60px;height:25px;top:30px;left:20px;"></div>
+        <div class="cloud-small" style="width:50px;height:20px;top:50px;right:30px;"></div>
+        <div class="balloon" id="balloon">
+          <div class="balloon-body"></div>
+          <div class="basket"></div>
+        </div>
+      </div>
+      <p class="rise-label" id="balloonLabel">👆 Klik untuk menerbangkan balon udara panas!</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Matahari memanaskan tanah</h3>
+            <p>Tanah menjadi hangat, lalu memanaskan udara di atasnya.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Udara panas naik</h3>
+            <p>Udara yang lebih ringan naik ke atas. Udara dingin turun menggantikannya.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Terjadi sirkulasi</h3>
+            <p>Gerakan naik-turun ini disebut <strong>konveksi</strong>. Itulah salah satu cara panas menyebar di udara!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(1)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(3)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 3: Cloud formation -->
+    <section id="sec3">
+      <h2><span class="emoji">☁️</span> Bagaimana Awan Terbentuk?</h2>
+      <p>Awan terbuat dari <strong>titik-titik air yang sangat kecil</strong> yang mengapung di udara. Yuk lihat caranya!</p>
+
+      <div class="cloud-form" id="cloudForm" onclick="formCloud()">
+        <div class="vapor"></div>
+      </div>
+      <p class="form-label" id="formLabel">👆 Klik untuk melihat awan terbentuk!</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Air menguap</h3>
+            <p>Matahari memanaskan air di laut, sungai, dan danau. Air berubah jadi uap air (gas) dan naik.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Udara naik & mendingin</h3>
+            <p>Uap air naik bersama udara panas. Semakin tinggi, semakin dingin udaranya.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Uap menjadi titik air</h3>
+            <p>Uap air mendingin dan berubah kembali jadi titik-titik air kecil. Ini disebut <strong>kondensasi</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Awan terbentuk!</h3>
+            <p>Jutaan titik air berkumpul dan terlihat sebagai awan di langit.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fun">
+        🌧️ Kalau titik airnya terlalu banyak dan berat, mereka jatuh sebagai <strong>hujan</strong>!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(2)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(4)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 4: Cloud types -->
+    <section id="sec4">
+      <h2><span class="emoji">🌤️</span> Jenis-jenis Awan</h2>
+      <p>Klik setiap kartu untuk mengenal jenis awan yang berbeda!</p>
+
+      <div class="cloud-types">
+        <div class="cloud-type" onclick="this.classList.toggle('revealed')">
+          <div class="icon">☁️</div>
+          <h3>Cumulus</h3>
+          <div class="desc">Awan gumpal putih seperti kapas. Biasanya muncul saat cuaca cerah.</div>
+        </div>
+        <div class="cloud-type" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🌫️</div>
+          <h3>Stratus</h3>
+          <div class="desc">Awan tipis dan merata seperti selimut abu-abu. Bisa membuat hari mendung.</div>
+        </div>
+        <div class="cloud-type" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🌩️</div>
+          <h3>Cumulonimbus</h3>
+          <div class="desc">Awan besar dan tinggi. Bisa membawa hujan deras, petir, bahkan badai!</div>
+        </div>
+        <div class="cloud-type" onclick="this.classList.toggle('revealed')">
+          <div class="icon">🕊️</div>
+          <h3>Cirrus</h3>
+          <div class="desc">Awan tipis seperti bulu di langit tinggi. Terbuat dari kristal es.</div>
+        </div>
+      </div>
+
+      <div class="tip">
+        💡 Coba amati langit hari ini! Jenis awan apa yang kamu lihat?
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(3)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(5)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 5: Facts -->
+    <section id="sec5">
+      <h2><span class="emoji">✨</span> Fakta Seru tentang Awan & Udara</h2>
+      <p>Klik setiap kartu untuk membuka fakta menariknya!</p>
+
+      <div class="fact-grid">
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🎈</div>
+          <strong>Balon Udara Panas</strong>
+          <div class="answer">Manusia memanfaatkan udara panas untuk terbang dengan balon udara panas!</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🌍</div>
+          <strong>Siklus Air</strong>
+          <div class="answer">Awan adalah bagian penting dari siklus air: uap → awan → hujan → sungai → laut lagi.</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">✈️</div>
+          <strong>Pesawat & Awan</strong>
+          <div class="answer">Pesawat sering terbang di atas awan karena di sana lebih tenang dan tidak hujan.</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🌈</div>
+          <strong>Pelangi</strong>
+          <div class="answer">Pelangi muncul saat sinar matahari melewati titik air hujan di udara!</div>
+        </div>
+      </div>
+
+      <div class="fun" style="margin-top:1.5rem;">
+        🌟 <strong>Fakta keren:</strong> Satu awan biasa bisa seberat ratusan ton air! Tapi titik airnya sangat kecil sehingga tetap mengapung di udara.
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(4)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(6)">Kerjakan Kuis! <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 6: Quiz -->
+    <section id="sec6">
+      <h2><span class="emoji">📝</span> Kuis Seru: Seberapa Pintar Kamu?</h2>
+      <p>Pilih jawaban yang menurutmu benar. Setelah selesai, klik tombol di bawah!</p>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>1. Mengapa udara panas naik ke atas?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="a"> Karena lebih berat dari udara dingin</label>
+          <label class="option"><input type="radio" name="q1" value="b"> Karena lebih ringan dari udara dingin</label>
+          <label class="option"><input type="radio" name="q1" value="c"> Karena warnanya merah</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>2. Apa yang membuat awan terbentuk?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="a"> Uap air yang mendingin dan menjadi titik-titik air</label>
+          <label class="option"><input type="radio" name="q2" value="b"> Asap dari mobil</label>
+          <label class="option"><input type="radio" name="q2" value="c"> Debu dari tanah</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="c">
+        <h3>3. Awan seperti kapas putih yang muncul saat cuaca cerah disebut?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="a"> Stratus</label>
+          <label class="option"><input type="radio" name="q3" value="b"> Cirrus</label>
+          <label class="option"><input type="radio" name="q3" value="c"> Cumulus</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>4. Apa yang terjadi jika titik air di awan terlalu banyak dan berat?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="a"> Awan menjadi hilang</label>
+          <label class="option"><input type="radio" name="q4" value="b"> Jatuh sebagai hujan</label>
+          <label class="option"><input type="radio" name="q4" value="c"> Menjadi pelangi langsung</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>5. Apa yang dimanfaatkan manusia dari udara panas untuk terbang?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="a"> Balon udara panas</label>
+          <label class="option"><input type="radio" name="q5" value="b"> Sepeda</label>
+          <label class="option"><input type="radio" name="q5" value="c"> Perahu</label>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="checkQuiz()">Cek Jawaban Saya! ✅</button>
+
+      <div class="result-box" id="resultBox">
+        <div class="score" id="scoreDisplay">0/5</div>
+        <div class="score-message" id="scoreMessage"></div>
+        <button class="btn-retry" onclick="resetQuiz()">Coba Lagi 🔄</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(5)"><span>←</span> Kembali</button>
+        <div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dibuat dengan ❤️ untuk anak-anak Indonesia yang ingin tahu tentang bumi & langit kita 🌍☁️
+  </footer>
+
+  <script>
+    let current = 1;
+    const total = 6;
+
+    const navDots = document.getElementById('navDots');
+    for (let i = 1; i <= total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      navDots.appendChild(dot);
+    }
+
+    function goTo(n) {
+      document.getElementById('sec' + current).classList.remove('active');
+      current = n;
+      document.getElementById('sec' + current).classList.add('active');
+      
+      document.querySelectorAll('.nav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i + 1 === current);
+      });
+
+      document.getElementById('progress').style.width = (current / total * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Rise air
+    function riseAir() {
+      const demo = document.getElementById('riseDemo');
+      const label = document.getElementById('riseLabel');
+      demo.classList.add('active');
+      label.textContent = '🔥 Udara panas naik ke atas! Lihat partikelnya!';
+      setTimeout(() => {
+        demo.classList.remove('active');
+        label.textContent = '👆 Klik lagi untuk melihat sekali lagi!';
+      }, 2000);
+    }
+
+    // Balloon
+    let flying = false;
+    function flyBalloon() {
+      const demo = document.getElementById('balloonDemo');
+      const label = document.getElementById('balloonLabel');
+      if (!flying) {
+        demo.classList.add('flying');
+        label.textContent = '🎈 Balon naik karena udara panas di dalamnya!';
+        flying = true;
+      } else {
+        demo.classList.remove('flying');
+        label.textContent = '👆 Klik lagi untuk menerbangkan balon!';
+        flying = false;
+      }
+    }
+
+    // Cloud form
+    function formCloud() {
+      const demo = document.getElementById('cloudForm');
+      const label = document.getElementById('formLabel');
+      demo.classList.add('active');
+      label.textContent = '☁️ Awan terbentuk dari uap air yang mendingin!';
+      setTimeout(() => {
+        demo.classList.remove('active');
+        label.textContent = '👆 Klik lagi untuk melihat pembentukan awan!';
+      }, 2500);
+    }
+
+    function revealFact(card) {
+      card.classList.toggle('revealed');
+    }
+
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const name = this.querySelector('input').name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+          inp.closest('.option').classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      const questions = document.querySelectorAll('.quiz-question');
+      
+      questions.forEach(q => {
+        const correct = q.dataset.correct;
+        const selected = q.querySelector('input:checked');
+        const options = q.querySelectorAll('.option');
+        
+        options.forEach(opt => {
+          opt.classList.remove('correct', 'wrong');
+          const val = opt.querySelector('input').value;
+          if (val === correct) opt.classList.add('correct');
+          if (selected && opt.querySelector('input').checked && val !== correct) {
+            opt.classList.add('wrong');
+          }
+        });
+
+        if (selected && selected.value === correct) score++;
+      });
+
+      const resultBox = document.getElementById('resultBox');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const scoreMessage = document.getElementById('scoreMessage');
+
+      scoreDisplay.textContent = score + '/5';
+      
+      if (score === 5) {
+        scoreMessage.innerHTML = '🎉 Sempurna! Kamu ahli awan & udara panas! Hebat!';
+      } else if (score >= 3) {
+        scoreMessage.innerHTML = '👍 Bagus! Kamu sudah paham banyak tentang awan dan udara!';
+      } else {
+        scoreMessage.innerHTML = '💪 Terus belajar ya! Baca lagi materinya, lalu coba ulangi kuisnya!';
+      }
+
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(inp => inp.checked = false);
+      document.getElementById('resultBox').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

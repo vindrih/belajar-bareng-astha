@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar tentang Awan Panas Gunung Meletus - Kelas 4 SD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --ash: #6c757d;
+      --ash-dark: #495057;
+      --hot: #e63946;
+      --orange: #ff6b35;
+      --yellow: #ffbe0b;
+      --sky: #87ceeb;
+      --text: #2b2d42;
+      --card-bg: #fff8f5;
+      --green: #2d6a4f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', 'Comic Neue', sans-serif;
+      background: linear-gradient(180deg, #6c757d 0%, #adb5bd 30%, #dee2e6 60%, #e9ecef 100%);
+      min-height: 100vh;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #e63946, #ff6b35);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e9ecef;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b35, #e63946);
+      transition: width 0.4s ease;
+      width: 16.6%;
+    }
+
+    .nav-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .nav-dot.active {
+      background: #e63946;
+      transform: scale(1.3);
+      border-color: #9b2226;
+    }
+
+    .nav-dot:hover { background: #ff6b35; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      border: 3px solid transparent;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+      border-color: #e63946;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #9b2226;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .emoji { font-size: 1.7rem; }
+
+    p, li { font-size: 1.12rem; margin-bottom: 0.8rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.5rem; }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe066 0%, #ffbe0b 100%);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Eruption + hot cloud demo */
+    .erupt-demo {
+      width: 100%;
+      max-width: 380px;
+      height: 300px;
+      margin: 1.5rem auto;
+      position: relative;
+      background: linear-gradient(to top, #6b4226 0%, #87ceeb 45%, #4a90a4 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.15);
+    }
+
+    .volcano-shape {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 140px;
+      background: linear-gradient(to top, #5a3a1e, #8b5a2b);
+      clip-path: polygon(5% 100%, 95% 100%, 72% 20%, 28% 20%);
+      z-index: 2;
+    }
+
+    .crater-top {
+      position: absolute;
+      bottom: 125px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 18px;
+      background: #2a180f;
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    .hot-cloud {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.3);
+      width: 100px;
+      height: 60px;
+      background: radial-gradient(ellipse, #ff6b35 0%, #6c757d 50%, #495057 80%);
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 4;
+      transition: all 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+      box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+    }
+
+    .erupt-demo.active .hot-cloud {
+      opacity: 0.95;
+      transform: translateX(-50%) scale(1.8) translateY(-40px);
+      width: 180px;
+      height: 100px;
+    }
+
+    .ash-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #6c757d;
+      border-radius: 50%;
+      bottom: 150px;
+      left: 50%;
+      opacity: 0;
+      z-index: 5;
+    }
+
+    .erupt-demo.active .ash-particle {
+      animation: ashFly 1.5s ease-out forwards;
+    }
+
+    .ash-particle:nth-child(1) { animation-delay: 0.2s; }
+    .ash-particle:nth-child(2) { left: 40%; animation-delay: 0.3s; }
+    .ash-particle:nth-child(3) { left: 60%; animation-delay: 0.15s; }
+    .ash-particle:nth-child(4) { left: 35%; animation-delay: 0.4s; width: 6px; height: 6px; }
+    .ash-particle:nth-child(5) { left: 65%; animation-delay: 0.25s; width: 10px; height: 10px; }
+
+    @keyframes ashFly {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(-120px) translateX(var(--tx, 30px)); opacity: 0; }
+    }
+
+    .erupt-label {
+      text-align: center;
+      font-weight: 700;
+      color: #9b2226;
+      font-size: 1.05rem;
+      margin-top: 0.6rem;
+      min-height: 1.4rem;
+    }
+
+    /* Compare cards */
+    .compare-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 550px) {
+      .compare-box { grid-template-columns: 1fr; }
+    }
+
+    .compare-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.3rem;
+      text-align: center;
+      border: 3px solid #eee;
+      transition: transform 0.3s;
+    }
+
+    .compare-card:hover { transform: translateY(-5px); }
+    .compare-card.normal { border-color: #4cc9f0; }
+    .compare-card.hot { border-color: #e63946; }
+    .compare-card .icon { font-size: 2.8rem; margin-bottom: 0.4rem; }
+    .compare-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin: 1.5rem 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: white;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      border-left: 6px solid #e63946;
+      transition: transform 0.25s;
+    }
+
+    .step:hover { transform: translateX(6px); }
+
+    .step-num {
+      background: #e63946;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .step-content p { font-size: 1rem; margin: 0; color: #444; }
+
+    /* Danger cards */
+    .danger-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .danger-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px solid #f8d7da;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .danger-card:hover {
+      border-color: #e63946;
+      transform: scale(1.03);
+      background: #fff5f5;
+    }
+
+    .danger-card .icon { font-size: 2.4rem; margin-bottom: 0.4rem; }
+    .danger-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; color: #9b2226; }
+    .danger-card p { font-size: 0.95rem; color: #555; margin: 0; }
+
+    /* Safety */
+    .safety-list {
+      background: white;
+      border-radius: 16px;
+      padding: 1.3rem;
+      margin: 1.5rem 0;
+      border: 3px solid #2d6a4f;
+    }
+
+    .safety-list h3 {
+      color: #2d6a4f;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .safety-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.05rem;
+    }
+
+    .safety-item .num {
+      background: #2d6a4f;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Fact cards */
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .fact-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      border: 2px dashed #e63946;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .fact-card:hover {
+      background: #fff5f5;
+      transform: scale(1.03);
+    }
+
+    .fact-card .icon { font-size: 2.4rem; margin-bottom: 0.4rem; }
+    .fact-card .answer {
+      display: none;
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px dashed #ccc;
+      font-size: 0.98rem;
+      color: #9b2226;
+      font-weight: 600;
+    }
+
+    .fact-card.revealed .answer { display: block; animation: fadeIn 0.4s; }
+    .fact-card.revealed {
+      border-style: solid;
+      background: #fff5f5;
+    }
+
+    .tip {
+      background: #e0f7fa;
+      border-left: 5px solid #00acc1;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .warning {
+      background: #fff3e0;
+      border-left: 5px solid #ff6b35;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .danger-box {
+      background: #f8d7da;
+      border-left: 5px solid #e63946;
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+      margin: 1rem 0;
+      font-size: 1.05rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #e63946, #9b2226);
+      color: white;
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+    }
+
+    .btn-prev {
+      background: linear-gradient(135deg, #6c757d, #495057);
+      color: white;
+    }
+
+    .btn-prev:hover { transform: translateY(-2px); }
+
+    /* Quiz */
+    .quiz-question {
+      background: white;
+      border-radius: 16px;
+      padding: 1.4rem;
+      margin-bottom: 1.1rem;
+      border: 2px solid #eee;
+    }
+
+    .quiz-question h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .option {
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1.02rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .option:hover {
+      background: #fff5f5;
+      border-color: #e63946;
+    }
+
+    .option.selected {
+      background: #fff5f5;
+      border-color: #e63946;
+      font-weight: 700;
+    }
+
+    .option.correct {
+      background: #d8f3dc;
+      border-color: #2d6a4f;
+    }
+
+    .option.wrong {
+      background: #f8d7da;
+      border-color: #e63946;
+    }
+
+    .option input { display: none; }
+
+    .result-box {
+      text-align: center;
+      padding: 2rem;
+      background: white;
+      border-radius: 20px;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    .score {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #9b2226;
+    }
+
+    .score-message {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #e63946, #9b2226);
+      color: white;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .btn-retry {
+      background: linear-gradient(135deg, #4cc9f0, #0077b6);
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌋 Yuk Belajar tentang Awan Panas!</h1>
+    <p>Materi Seru untuk Anak Kelas 4 SD</p>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="nav-dots" id="navDots"></div>
+
+  <main>
+    <!-- Section 1 -->
+    <section id="sec1" class="active">
+      <h2><span class="emoji">☁️🔥</span> Apa itu Awan Panas?</h2>
+      <p>Halo teman-teman! Kita sudah belajar tentang awan biasa di langit. Tapi ada juga awan yang sangat berbeda: <span class="highlight">awan panas</span> dari gunung berapi!</p>
+      <p><strong>Awan panas</strong> adalah awan gelap yang keluar saat gunung berapi meletus. Isinya campuran gas panas, abu vulkanik, dan potongan batu kecil yang sangat panas.</p>
+
+      <div class="erupt-demo" id="eruptDemo" onclick="erupt()">
+        <div class="ash-particle" style="--tx: -40px;"></div>
+        <div class="ash-particle" style="--tx: 50px;"></div>
+        <div class="ash-particle" style="--tx: -20px;"></div>
+        <div class="ash-particle" style="--tx: 60px;"></div>
+        <div class="ash-particle" style="--tx: 10px;"></div>
+        <div class="hot-cloud"></div>
+        <div class="crater-top"></div>
+        <div class="volcano-shape"></div>
+      </div>
+      <p class="erupt-label" id="eruptLabel">👆 Klik gunung untuk melihat awan panas keluar!</p>
+
+      <div class="danger-box">
+        ⚠️ <strong>Penting!</strong> Awan panas sangat berbahaya. Suhu di dalamnya bisa mencapai ratusan derajat Celcius — jauh lebih panas dari oven!
+      </div>
+
+      <div class="nav-buttons">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section id="sec2">
+      <h2><span class="emoji">🌋</span> Bagaimana Awan Panas Terbentuk?</h2>
+      <p>Awan panas muncul saat gunung berapi meletus dengan sangat kuat. Yuk ikuti langkahnya!</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Gunung berapi meletus</h3>
+            <p>Tekanan besar di dalam bumi mendorong magma, gas, dan batu keluar dengan sangat cepat.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Abu & gas panas keluar</h3>
+            <p>Abu vulkanik, gas panas, dan pecahan batu terbang ke udara membentuk awan gelap.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Awan panas mengalir</h3>
+            <p>Karena berat dan panas, awan ini bisa mengalir cepat menuruni lereng gunung — seperti sungai panas!</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Menyebar ke sekitar</h3>
+            <p>Awan panas bisa mencapai jarak jauh dan menutupi desa di sekitar gunung.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="warning">
+        🌡️ Suhu awan panas bisa mencapai <strong>200°C sampai 700°C</strong> atau lebih! Sangat berbahaya bagi makhluk hidup.
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(1)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(3)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 3: Comparison -->
+    <section id="sec3">
+      <h2><span class="emoji">⚖️</span> Awan Biasa vs Awan Panas</h2>
+      <p>Apa bedanya awan di langit dengan awan panas gunung berapi?</p>
+
+      <div class="compare-box">
+        <div class="compare-card normal">
+          <div class="icon">☁️</div>
+          <h3>Awan Biasa</h3>
+          <p>Terbuat dari titik air</p>
+          <p>Dingin atau sejuk</p>
+          <p>Bisa bawa hujan</p>
+          <p>Aman untuk dilihat</p>
+          <p>Naik karena udara ringan</p>
+        </div>
+        <div class="compare-card hot">
+          <div class="icon">🌋</div>
+          <h3>Awan Panas</h3>
+          <p>Terbuat dari abu & gas panas</p>
+          <p>Sangat panas!</p>
+          <p>Bisa bawa abu & batu</p>
+          <p>Sangat berbahaya</p>
+          <p>Mengalir karena berat</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        💡 Awan biasa membuat hujan yang menyuburkan tanah. Awan panas justru bisa merusak apa saja yang dilaluinya.
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(2)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(4)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 4: Why dangerous -->
+    <section id="sec4">
+      <h2><span class="emoji">⚠️</span> Mengapa Awan Panas Berbahaya?</h2>
+      <p>Klik setiap kartu untuk tahu bahayanya!</p>
+
+      <div class="danger-grid">
+        <div class="danger-card">
+          <div class="icon">🔥</div>
+          <h3>Sangat Panas</h3>
+          <p>Bisa membakar apa saja yang disentuhnya.</p>
+        </div>
+        <div class="danger-card">
+          <div class="icon">💨</div>
+          <h3>Bergerak Cepat</h3>
+          <p>Bisa melaju lebih cepat dari orang berlari.</p>
+        </div>
+        <div class="danger-card">
+          <div class="icon">🌫️</div>
+          <h3>Sulit Bernapas</h3>
+          <p>Abu tebal membuat udara susah dihirup.</p>
+        </div>
+        <div class="danger-card">
+          <div class="icon">🏠</div>
+          <h3>Merusak Rumah</h3>
+          <p>Bisa merobohkan bangunan dan menutupi desa.</p>
+        </div>
+      </div>
+
+      <div class="danger-box">
+        🚨 Itulah sebabnya penduduk di sekitar gunung berapi harus segera mengungsi jika ada peringatan letusan!
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(3)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(5)">Lanjut <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 5: Safety & Facts -->
+    <section id="sec5">
+      <h2><span class="emoji">🛡️</span> Keselamatan & Fakta Seru</h2>
+
+      <div class="safety-list">
+        <h3>🛡️ Apa yang Harus Dilakukan?</h3>
+        <div class="safety-item">
+          <div class="num">1</div>
+          <div>Ikuti peringatan dari petugas gunung berapi (PVMBG).</div>
+        </div>
+        <div class="safety-item">
+          <div class="num">2</div>
+          <div>Segera mengungsi ke tempat yang aman jika diminta.</div>
+        </div>
+        <div class="safety-item">
+          <div class="num">3</div>
+          <div>Jangan mendekati gunung yang sedang aktif.</div>
+        </div>
+        <div class="safety-item">
+          <div class="num">4</div>
+          <div>Pakai masker jika ada abu vulkanik di udara.</div>
+        </div>
+      </div>
+
+      <p style="margin-top:1.5rem;">Klik kartu di bawah untuk fakta menarik!</p>
+
+      <div class="fact-grid">
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🇮🇩</div>
+          <strong>Di Indonesia</strong>
+          <div class="answer">Gunung Merapi, Sinabung, dan Semeru pernah mengeluarkan awan panas.</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">⚡</div>
+          <strong>Kecepatan</strong>
+          <div class="answer">Awan panas bisa bergerak sampai 100 km/jam atau lebih!</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">🔬</div>
+          <strong>Nama Ilmiah</strong>
+          <div class="answer">Dalam ilmu pengetahuan disebut "aliran piroklastik" (pyroclastic flow).</div>
+        </div>
+        <div class="fact-card" onclick="revealFact(this)">
+          <div class="icon">📡</div>
+          <strong>Pemantauan</strong>
+          <div class="answer">Ilmuwan memantau gunung berapi setiap hari agar bisa memberi peringatan dini.</div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(4)"><span>←</span> Kembali</button>
+        <button class="btn-next" onclick="goTo(6)">Kerjakan Kuis! <span>→</span></button>
+      </div>
+    </section>
+
+    <!-- Section 6: Quiz -->
+    <section id="sec6">
+      <h2><span class="emoji">📝</span> Kuis Seru: Seberapa Pintar Kamu?</h2>
+      <p>Pilih jawaban yang menurutmu benar. Setelah selesai, klik tombol di bawah!</p>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>1. Apa itu awan panas?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q1" value="a"> Awan yang membawa hujan es</label>
+          <label class="option"><input type="radio" name="q1" value="b"> Awan dari gunung berapi yang berisi gas & abu panas</label>
+          <label class="option"><input type="radio" name="q1" value="c"> Awan putih yang lembut seperti kapas</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>2. Kapan awan panas muncul?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q2" value="a"> Saat gunung berapi meletus</label>
+          <label class="option"><input type="radio" name="q2" value="b"> Saat hujan deras</label>
+          <label class="option"><input type="radio" name="q2" value="c"> Saat matahari terbenam</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="c">
+        <h3>3. Mengapa awan panas berbahaya?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q3" value="a"> Karena warnanya hitam</label>
+          <label class="option"><input type="radio" name="q3" value="b"> Karena berbau tidak enak</label>
+          <label class="option"><input type="radio" name="q3" value="c"> Karena sangat panas, cepat, dan sulit bernapas</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="b">
+        <h3>4. Apa yang harus dilakukan jika ada peringatan awan panas?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q4" value="a"> Mendekati gunung untuk melihat</label>
+          <label class="option"><input type="radio" name="q4" value="b"> Segera mengungsi ke tempat aman</label>
+          <label class="option"><input type="radio" name="q4" value="c"> Tetap bermain di luar rumah</label>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-correct="a">
+        <h3>5. Apa bedanya awan panas dengan awan biasa?</h3>
+        <div class="options">
+          <label class="option"><input type="radio" name="q5" value="a"> Awan panas berisi abu & gas panas, awan biasa berisi titik air</label>
+          <label class="option"><input type="radio" name="q5" value="b"> Tidak ada perbedaan sama sekali</label>
+          <label class="option"><input type="radio" name="q5" value="c"> Awan panas lebih sejuk daripada awan biasa</label>
+        </div>
+      </div>
+
+      <button class="btn-submit" onclick="checkQuiz()">Cek Jawaban Saya! ✅</button>
+
+      <div class="result-box" id="resultBox">
+        <div class="score" id="scoreDisplay">0/5</div>
+        <div class="score-message" id="scoreMessage"></div>
+        <button class="btn-retry" onclick="resetQuiz()">Coba Lagi 🔄</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-prev" onclick="goTo(5)"><span>←</span> Kembali</button>
+        <div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Dibuat dengan ❤️ untuk anak-anak Indonesia — kenali bahaya gunung berapi agar selalu waspada 🌋
+  </footer>
+
+  <script>
+    let current = 1;
+    const total = 6;
+
+    const navDots = document.getElementById('navDots');
+    for (let i = 1; i <= total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      navDots.appendChild(dot);
+    }
+
+    function goTo(n) {
+      document.getElementById('sec' + current).classList.remove('active');
+      current = n;
+      document.getElementById('sec' + current).classList.add('active');
+      
+      document.querySelectorAll('.nav-dot').forEach((d, i) => {
+        d.classList.toggle('active', i + 1 === current);
+      });
+
+      document.getElementById('progress').style.width = (current / total * 100) + '%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function erupt() {
+      const demo = document.getElementById('eruptDemo');
+      const label = document.getElementById('eruptLabel');
+      demo.classList.add('active');
+      label.textContent = '💥 Awan panas keluar dari gunung! Sangat panas & berbahaya!';
+      setTimeout(() => {
+        demo.classList.remove('active');
+        label.textContent = '👆 Klik lagi untuk melihat sekali lagi!';
+      }, 2200);
+    }
+
+    function revealFact(card) {
+      card.classList.toggle('revealed');
+    }
+
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        const name = this.querySelector('input').name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+          inp.closest('.option').classList.remove('selected');
+        });
+        this.classList.add('selected');
+        this.querySelector('input').checked = true;
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      const questions = document.querySelectorAll('.quiz-question');
+      
+      questions.forEach(q => {
+        const correct = q.dataset.correct;
+        const selected = q.querySelector('input:checked');
+        const options = q.querySelectorAll('.option');
+        
+        options.forEach(opt => {
+          opt.classList.remove('correct', 'wrong');
+          const val = opt.querySelector('input').value;
+          if (val === correct) opt.classList.add('correct');
+          if (selected && opt.querySelector('input').checked && val !== correct) {
+            opt.classList.add('wrong');
+          }
+        });
+
+        if (selected && selected.value === correct) score++;
+      });
+
+      const resultBox = document.getElementById('resultBox');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const scoreMessage = document.getElementById('scoreMessage');
+
+      scoreDisplay.textContent = score + '/5';
+      
+      if (score === 5) {
+        scoreMessage.innerHTML = '🎉 Sempurna! Kamu sudah paham bahaya awan panas! Hebat!';
+      } else if (score >= 3) {
+        scoreMessage.innerHTML = '👍 Bagus! Kamu sudah tahu banyak tentang awan panas!';
+      } else {
+        scoreMessage.innerHTML = '💪 Terus belajar ya! Baca lagi materinya, lalu coba ulangi kuisnya!';
+      }
+
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.classList.remove('selected', 'correct', 'wrong');
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(inp => inp.checked = false);
+      document.getElementById('resultBox').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

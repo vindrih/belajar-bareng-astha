@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Parts – Astha Belajar Seru</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#cffafe,#ecfeff 50%,#f0fdf4);min-height:100vh;color:#1e293b;line-height:1.6}
+    header{background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;text-align:center;padding:1.4rem 1rem}
+    header h1{font-size:1.7rem;font-weight:800}header p{opacity:.95;margin-top:.3rem}
+    .progress{height:8px;background:#e2e8f0}.pf{height:100%;background:#0891b2;width:25.0%;transition:width .4s}
+    .dots{display:flex;justify-content:center;gap:8px;padding:.9rem}.dot{width:11px;height:11px;border-radius:50%;background:#cbd5e1;cursor:pointer}.dot.active{background:#0891b2;transform:scale(1.3)}
+    main{max-width:880px;margin:0 auto;padding:1rem}
+    section{background:#fff;border-radius:22px;padding:1.6rem;margin-bottom:1.3rem;box-shadow:0 8px 25px rgba(0,0,0,.06);border:3px solid transparent;display:none;animation:f .45s}
+    section.active{display:block;border-color:#0891b2}@keyframes f{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    h2{font-size:1.35rem;color:#0e7490;margin-bottom:.9rem}p{font-size:1.08rem;margin-bottom:.7rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin:1.2rem 0}
+    .card{background:#f8fafc;border-radius:14px;padding:1rem;text-align:center;border:2px solid #e2e8f0;cursor:pointer;transition:.25s}
+    .card:hover{border-color:#0891b2;transform:translateY(-3px)}
+    .card .en{font-size:1.1rem;font-weight:800;color:#0891b2}.card .id{font-size:.9rem;color:#64748b;margin-top:.25rem}
+    .nav{display:flex;justify-content:space-between;gap:1rem;margin-top:1.4rem;flex-wrap:wrap}
+    button{font-family:inherit;font-size:1.05rem;font-weight:700;padding:.7rem 1.3rem;border:none;border-radius:50px;cursor:pointer}
+    .next{background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff}.prev{background:#64748b;color:#fff}
+    .quiz{background:#fff;border-radius:14px;padding:1.2rem;margin-bottom:1rem;border:2px solid #e2e8f0}
+    .opt{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:.7rem 1rem;margin:.4rem 0;cursor:pointer}
+    .opt:hover{border-color:#0891b2}.opt.sel{border-color:#0891b2;background:#f0fdf4;font-weight:700}
+    .opt.ok{background:#dcfce7;border-color:#16a34a}.opt.bad{background:#fee2e2;border-color:#dc2626}
+    .result{text-align:center;padding:1.5rem;display:none}.result.show{display:block}.score{font-size:2.8rem;font-weight:800;color:#0891b2}
+    footer{text-align:center;padding:1.5rem;color:#64748b;font-size:.9rem}.back{display:inline-block;margin:1rem;color:#0891b2;font-weight:700;text-decoration:none}
+  </style>
+</head>
+<body>
+  <header><h1>🧍 Body Parts</h1><p>Bagian Tubuh – Bahasa Inggris Kelas 4</p></header>
+  <div class="progress"><div class="pf" id="prog"></div></div>
+  <div class="dots" id="dots"></div>
+  <main><section id="s1" class="active"><h2>🧍 Bagian Tubuh</h2>
+      <div class="grid">
+        <div class="card" onclick="say('head')"><div class="en">Head</div><div class="id">Kepala</div></div>
+        <div class="card" onclick="say('eye')"><div class="en">Eye</div><div class="id">Mata</div></div>
+        <div class="card" onclick="say('ear')"><div class="en">Ear</div><div class="id">Telinga</div></div>
+        <div class="card" onclick="say('nose')"><div class="en">Nose</div><div class="id">Hidung</div></div>
+        <div class="card" onclick="say('mouth')"><div class="en">Mouth</div><div class="id">Mulut</div></div>
+        <div class="card" onclick="say('hand')"><div class="en">Hand</div><div class="id">Tangan</div></div>
+        <div class="card" onclick="say('foot')"><div class="en">Foot</div><div class="id">Kaki</div></div>
+        <div class="card" onclick="say('leg')"><div class="en">Leg</div><div class="id">Kaki (paha-betis)</div></div>
+      </div><div class="nav"><div></div><button class="next" onclick="go(2)">Lanjut →</button></div></section>
+<section id="s2"><h2>🗣️ Kalimat</h2>
+      <p><strong>I have two eyes.</strong> → Saya punya dua mata.</p>
+      <p><strong>This is my hand.</strong> → Ini tanganku.</p>
+      <p><strong>Touch your nose!</strong> → Sentuh hidungmu!</div>
+      <p><strong>Clap your hands!</strong> → Tepuk tanganmu!</p><div class="nav"><button class="prev" onclick="go(1)">← Kembali</button><button class="next" onclick="go(3)">Lanjut →</button></div></section>
+<section id="s3"><h2>🎮 Simon Says Style</h2>
+      <p>Coba ikuti instruksi (klik untuk dengar):</p>
+      <div class="grid">
+        <div class="card" onclick="say('Touch your head')"><div class="en">Touch your head</div></div>
+        <div class="card" onclick="say('Touch your nose')"><div class="en">Touch your nose</div></div>
+        <div class="card" onclick="say('Clap your hands')"><div class="en">Clap your hands</div></div>
+        <div class="card" onclick="say('Stomp your feet')"><div class="en">Stomp your feet</div></div>
+      </div><div class="nav"><button class="prev" onclick="go(2)">← Kembali</button><button class="next" onclick="go(4)">Kerjakan Kuis! →</button></div></section>
+<section id="s4">
+      <h2>📝 Kuis Body Parts</h2><div class="quiz" data-c="b"><h3>1. 'Head' artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">a) Tangan</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">b) Kepala</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">c) Kaki</div></div>
+<div class="quiz" data-c="a"><h3>2. 'Eye' artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">a) Mata</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">b) Telinga</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">c) Hidung</div></div>
+<div class="quiz" data-c="c"><h3>3. 'Hand' artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">a) Kaki</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">b) Mulut</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">c) Tangan</div></div>
+<div class="quiz" data-c="a"><h3>4. 'Nose' artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">a) Hidung</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">b) Mata</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">c) Kepala</div></div>
+<div class="quiz" data-c="b"><h3>5. 'I have two eyes' artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">a) Saya punya dua tangan</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">b) Saya punya dua mata</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">c) Saya punya dua kaki</div></div>
+
+      <button class="next" style="display:block;margin:1rem auto" onclick="cek()">Cek Jawaban ✅</button>
+      <div class="result" id="hasil"><div class="score" id="skor">0/5</div><p id="pesan"></p></div>
+      <div class="nav"><button class="prev" onclick="go(3)">← Kembali</button><div></div></div>
+    </section></main>
+  <div style="text-align:center"><a class="back" href="../index.html">← Kembali ke Astha Belajar Seru</a></div>
+  <footer>Astha Belajar Seru • Bahasa Inggris Kelas 4</footer>
+  <script>
+    let cur=1;const total=4;const dots=document.getElementById('dots');
+    for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>go(i);dots.appendChild(d)}
+    function go(n){document.getElementById('s'+cur).classList.remove('active');cur=n;document.getElementById('s'+cur).classList.add('active');
+      document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===cur));document.getElementById('prog').style.width=(cur/total*100)+'%';window.scrollTo({top:0,behavior:'smooth'})}
+    function say(t){if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u)}}
+    function pilih(el){el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel')}
+    function cek(){let s=0;document.querySelectorAll('.quiz').forEach(q=>{const c=q.dataset.c;const sel=q.querySelector('.opt.sel');
+      q.querySelectorAll('.opt').forEach(o=>{o.classList.remove('ok','bad');if(o.dataset.v===c)o.classList.add('ok');if(sel&&o.classList.contains('sel')&&o.dataset.v!==c)o.classList.add('bad')});
+      if(sel&&sel.dataset.v===c)s++});document.getElementById('skor').textContent=s+'/5';
+      document.getElementById('pesan').textContent=s===5?'🎉 Perfect!':s>=3?'👍 Good job!':'💪 Keep practicing!';document.getElementById('hasil').classList.add('show')}
+  </script>
+</body>
+</html>

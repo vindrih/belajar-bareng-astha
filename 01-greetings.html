@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greetings & Introductions – Astha Belajar Seru</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+    :root{--p:#4f46e5;--t:#1e293b;--c:#f8fafc}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#c7d2fe,#e0e7ff 40%,#f0fdf4);min-height:100vh;color:var(--t);line-height:1.6}
+    header{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;text-align:center;padding:1.4rem 1rem;box-shadow:0 4px 20px rgba(79,70,229,.35)}
+    header h1{font-size:1.7rem;font-weight:800}
+    header p{font-size:1rem;opacity:.95;margin-top:.3rem}
+    .progress{height:8px;background:#e2e8f0}.progress-fill{height:100%;background:linear-gradient(90deg,#818cf8,#4f46e5);width:16.6%;transition:width .4s}
+    .dots{display:flex;justify-content:center;gap:8px;padding:.9rem}.dot{width:11px;height:11px;border-radius:50%;background:#cbd5e1;cursor:pointer}.dot.active{background:#4f46e5;transform:scale(1.3)}
+    main{max-width:880px;margin:0 auto;padding:1rem}
+    section{background:#fff;border-radius:22px;padding:1.6rem;margin-bottom:1.3rem;box-shadow:0 8px 25px rgba(0,0,0,.06);border:3px solid transparent;display:none;animation:fade .45s ease}
+    section.active{display:block;border-color:#4f46e5}
+    @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    h2{font-size:1.4rem;color:#3730a3;margin-bottom:.9rem;display:flex;align-items:center;gap:8px}
+    p,li{font-size:1.08rem;margin-bottom:.7rem}ul{padding-left:1.4rem}
+    .hl{background:linear-gradient(120deg,#fef08a,#fde047);padding:.1rem .35rem;border-radius:5px;font-weight:700}
+    .bubble{background:#eef2ff;border-radius:16px;padding:1rem 1.2rem;margin:1rem 0;border-left:5px solid #4f46e5}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.9rem;margin:1.2rem 0}
+    .card{background:#f8fafc;border-radius:14px;padding:1rem;text-align:center;border:2px solid #e2e8f0;cursor:pointer;transition:.25s}
+    .card:hover,.card.on{border-color:#4f46e5;background:#eef2ff;transform:translateY(-4px)}
+    .card .en{font-size:1.15rem;font-weight:800;color:#4f46e5}
+    .card .id{font-size:.9rem;color:#64748b;margin-top:.25rem}
+    .nav{display:flex;justify-content:space-between;gap:1rem;margin-top:1.4rem;flex-wrap:wrap}
+    button{font-family:inherit;font-size:1.05rem;font-weight:700;padding:.7rem 1.3rem;border:none;border-radius:50px;cursor:pointer;transition:.25s}
+    .next{background:linear-gradient(135deg,#4f46e5,#3730a3);color:#fff}.prev{background:#64748b;color:#fff}
+    .quiz{background:#fff;border-radius:14px;padding:1.2rem;margin-bottom:1rem;border:2px solid #e2e8f0}
+    .opt{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:.7rem 1rem;margin:.4rem 0;cursor:pointer;transition:.2s}
+    .opt:hover{border-color:#4f46e5}.opt.sel{border-color:#4f46e5;background:#eef2ff;font-weight:700}
+    .opt.ok{background:#dcfce7;border-color:#16a34a}.opt.bad{background:#fee2e2;border-color:#dc2626}
+    .result{text-align:center;padding:1.5rem;display:none}.result.show{display:block}
+    .score{font-size:2.8rem;font-weight:800;color:#4f46e5}
+    footer{text-align:center;padding:1.5rem;color:#64748b;font-size:.9rem}
+    .back{display:inline-block;margin:1rem;color:#4f46e5;font-weight:700;text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>👋 Greetings & Introductions</h1>
+    <p>Salam & Perkenalan – Bahasa Inggris Kelas 4</p>
+  </header>
+  <div class="progress"><div class="progress-fill" id="prog"></div></div>
+  <div class="dots" id="dots"></div>
+  <main>
+    <section id="s1" class="active">
+      <h2>🌟 Apa itu Greetings?</h2>
+      <p><span class="hl">Greetings</span> artinya <strong>salam</strong> atau cara menyapa orang.</p>
+      <p>Di bahasa Inggris, kita punya banyak cara menyapa tergantung waktunya!</p>
+      <div class="grid">
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">Good morning</div><div class="id">Selamat pagi</div></div>
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">Good afternoon</div><div class="id">Selamat siang</div></div>
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">Good evening</div><div class="id">Selamat malam</div></div>
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">Hello / Hi</div><div class="id">Halo</div></div>
+      </div>
+      <div class="nav"><div></div><button class="next" onclick="go(2)">Lanjut →</button></div>
+    </section>
+    <section id="s2">
+      <h2>🗣️ Cara Memperkenalkan Diri</h2>
+      <div class="bubble">
+        <p><strong>My name is ...</strong> → Nama saya ...</p>
+        <p><strong>I am ...</strong> / <strong>I'm ...</strong> → Saya adalah ...</p>
+        <p><strong>Nice to meet you!</strong> → Senang berkenalan denganmu!</p>
+      </div>
+      <p>Contoh percakapan:</p>
+      <div class="bubble">
+        <p>A: Hello! My name is Raka.</p>
+        <p>B: Hi, Raka! I am Sinta. Nice to meet you!</p>
+        <p>A: Nice to meet you too!</p>
+      </div>
+      <div class="nav"><button class="prev" onclick="go(1)">← Kembali</button><button class="next" onclick="go(3)">Lanjut →</button></div>
+    </section>
+    <section id="s3">
+      <h2>❓ Menanyakan Nama & Kabar</h2>
+      <div class="grid">
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">What is your name?</div><div class="id">Siapa namamu?</div></div>
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">How are you?</div><div class="id">Apa kabar?</div></div>
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">I'm fine, thank you</div><div class="id">Saya baik-baik saja</div></div>
+        <div class="card" onclick="this.classList.toggle('on')"><div class="en">See you!</div><div class="id">Sampai jumpa!</div></div>
+      </div>
+      <div class="nav"><button class="prev" onclick="go(2)">← Kembali</button><button class="next" onclick="go(4)">Lanjut →</button></div>
+    </section>
+    <section id="s4">
+      <h2>🎯 Latihan Ucapkan!</h2>
+      <p>Klik kartu dan coba ucapkan dengan suara keras!</p>
+      <div class="grid">
+        <div class="card" onclick="speak('Hello, my name is Budi')"><div class="en">Hello, my name is Budi</div></div>
+        <div class="card" onclick="speak('Good morning, how are you?')"><div class="en">Good morning, how are you?</div></div>
+        <div class="card" onclick="speak('I am fine, thank you')"><div class="en">I am fine, thank you</div></div>
+        <div class="card" onclick="speak('Nice to meet you')"><div class="en">Nice to meet you</div></div>
+      </div>
+      <p style="text-align:center;color:#64748b;font-size:.95rem">💡 Klik kartu untuk mendengar (jika browser mendukung)</p>
+      <div class="nav"><button class="prev" onclick="go(3)">← Kembali</button><button class="next" onclick="go(5)">Lanjut →</button></div>
+    </section>
+    <section id="s5">
+      <h2>✨ Fakta Seru</h2>
+      <div class="bubble">
+        <p>🌍 Di Inggris, orang sering bilang <strong>"Hi"</strong> atau <strong>"Hey"</strong> ke teman.</p>
+        <p>🤝 Saat pertama ketemu, bilang <strong>"Nice to meet you"</strong> itu sopan sekali!</p>
+        <p>👋 <strong>"See you later"</strong> artinya sampai jumpa lagi nanti.</p>
+      </div>
+      <div class="nav"><button class="prev" onclick="go(4)">← Kembali</button><button class="next" onclick="go(6)">Kerjakan Kuis! →</button></div>
+    </section>
+    <section id="s6">
+      <h2>📝 Kuis Greetings</h2>
+      <div class="quiz" data-c="b"><h3>1. "Good morning" artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Selamat malam</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">Selamat pagi</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">Selamat tinggal</div>
+      </div>
+      <div class="quiz" data-c="a"><h3>2. Cara bilang "Nama saya Rina"?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">My name is Rina</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">How are you Rina</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">Good night Rina</div>
+      </div>
+      <div class="quiz" data-c="c"><h3>3. "Nice to meet you" artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Apa kabar?</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">Selamat tinggal</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">Senang berkenalan denganmu</div>
+      </div>
+      <div class="quiz" data-c="b"><h3>4. Jawaban untuk "How are you?"</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">My name is...</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">I'm fine, thank you</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">Good morning</div>
+      </div>
+      <div class="quiz" data-c="a"><h3>5. "See you!" artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Sampai jumpa!</div>
+        <div class="opt" onclick="pilih(this)" data-v="b">Selamat pagi</div>
+        <div class="opt" onclick="pilih(this)" data-v="c">Siapa namamu?</div>
+      </div>
+      <button class="next" style="display:block;margin:1rem auto" onclick="cek()">Cek Jawaban ✅</button>
+      <div class="result" id="hasil"><div class="score" id="skor">0/5</div><p id="pesan"></p></div>
+      <div class="nav"><button class="prev" onclick="go(5)">← Kembali</button><div></div></div>
+    </section>
+  </main>
+  <div style="text-align:center"><a class="back" href="../index.html">← Kembali ke Astha Belajar Seru</a></div>
+  <footer>Astha Belajar Seru • Bahasa Inggris Kelas 4</footer>
+  <script>
+    let cur=1;const total=6;
+    const dots=document.getElementById('dots');
+    for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>go(i);dots.appendChild(d)}
+    function go(n){document.getElementById('s'+cur).classList.remove('active');cur=n;document.getElementById('s'+cur).classList.add('active');
+      document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===cur));
+      document.getElementById('prog').style.width=(cur/total*100)+'%';window.scrollTo({top:0,behavior:'smooth'})}
+    function speak(t){if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u)}}
+    function pilih(el){el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel')}
+    function cek(){let s=0;document.querySelectorAll('.quiz').forEach(q=>{const c=q.dataset.c;const sel=q.querySelector('.opt.sel');
+      q.querySelectorAll('.opt').forEach(o=>{o.classList.remove('ok','bad');if(o.dataset.v===c)o.classList.add('ok');
+        if(sel&&o.classList.contains('sel')&&o.dataset.v!==c)o.classList.add('bad')});
+      if(sel&&sel.dataset.v===c)s++});
+      document.getElementById('skor').textContent=s+'/5';
+      document.getElementById('pesan').textContent=s===5?'🎉 Perfect!':s>=3?'👍 Good job!':'💪 Coba lagi ya!';
+      document.getElementById('hasil').classList.add('show')}
+  </script>
+</body>
+</html>

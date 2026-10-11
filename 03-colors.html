@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colors – Astha Belajar Seru</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#fce7f3,#fdf2f8 40%,#f0fdf4);min-height:100vh;color:#1e293b;line-height:1.6}
+    header{background:linear-gradient(135deg,#db2777,#ec4899);color:#fff;text-align:center;padding:1.4rem 1rem}
+    header h1{font-size:1.7rem;font-weight:800}header p{opacity:.95;margin-top:.3rem}
+    .progress{height:8px;background:#e2e8f0}.pf{height:100%;background:linear-gradient(90deg,#f472b6,#db2777);width:20%;transition:width .4s}
+    .dots{display:flex;justify-content:center;gap:8px;padding:.9rem}.dot{width:11px;height:11px;border-radius:50%;background:#cbd5e1;cursor:pointer}.dot.active{background:#db2777;transform:scale(1.3)}
+    main{max-width:880px;margin:0 auto;padding:1rem}
+    section{background:#fff;border-radius:22px;padding:1.6rem;margin-bottom:1.3rem;box-shadow:0 8px 25px rgba(0,0,0,.06);border:3px solid transparent;display:none;animation:f .45s}
+    section.active{display:block;border-color:#db2777}@keyframes f{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    h2{font-size:1.35rem;color:#9d174d;margin-bottom:.9rem}p{font-size:1.08rem;margin-bottom:.7rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.8rem;margin:1.2rem 0}
+    .col{border-radius:16px;padding:1.2rem .8rem;text-align:center;cursor:pointer;transition:.25s;font-weight:800;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.3)}
+    .col:hover{transform:scale(1.08)}.col span{display:block;font-size:.9rem;margin-top:.3rem;font-weight:600}
+    .nav{display:flex;justify-content:space-between;gap:1rem;margin-top:1.4rem;flex-wrap:wrap}
+    button{font-family:inherit;font-size:1.05rem;font-weight:700;padding:.7rem 1.3rem;border:none;border-radius:50px;cursor:pointer}
+    .next{background:linear-gradient(135deg,#db2777,#9d174d);color:#fff}.prev{background:#64748b;color:#fff}
+    .quiz{background:#fff;border-radius:14px;padding:1.2rem;margin-bottom:1rem;border:2px solid #e2e8f0}
+    .opt{background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:.7rem 1rem;margin:.4rem 0;cursor:pointer}
+    .opt:hover{border-color:#db2777}.opt.sel{border-color:#db2777;background:#fce7f3;font-weight:700}
+    .opt.ok{background:#dcfce7;border-color:#16a34a}.opt.bad{background:#fee2e2;border-color:#dc2626}
+    .result{text-align:center;padding:1.5rem;display:none}.result.show{display:block}.score{font-size:2.8rem;font-weight:800;color:#db2777}
+    footer{text-align:center;padding:1.5rem;color:#64748b;font-size:.9rem}.back{display:inline-block;margin:1rem;color:#db2777;font-weight:700;text-decoration:none}
+  </style>
+</head>
+<body>
+  <header><h1>🎨 Colors</h1><p>Warna-Warni – Bahasa Inggris Kelas 4</p></header>
+  <div class="progress"><div class="pf" id="prog"></div></div>
+  <div class="dots" id="dots"></div>
+  <main>
+    <section id="s1" class="active">
+      <h2>🌈 Warna Dasar</h2>
+      <p>Klik warna untuk mendengar namanya!</p>
+      <div class="grid">
+        <div class="col" style="background:#ef4444" onclick="say('red')">Red<span>Merah</span></div>
+        <div class="col" style="background:#3b82f6" onclick="say('blue')">Blue<span>Biru</span></div>
+        <div class="col" style="background:#22c55e" onclick="say('green')">Green<span>Hijau</span></div>
+        <div class="col" style="background:#eab308;color:#1e293b;text-shadow:none" onclick="say('yellow')">Yellow<span>Kuning</span></div>
+        <div class="col" style="background:#f97316" onclick="say('orange')">Orange<span>Oranye</span></div>
+        <div class="col" style="background:#a855f7" onclick="say('purple')">Purple<span>Ungu</span></div>
+        <div class="col" style="background:#ec4899" onclick="say('pink')">Pink<span>Merah Muda</span></div>
+        <div class="col" style="background:#1e293b" onclick="say('black')">Black<span>Hitam</span></div>
+        <div class="col" style="background:#f8fafc;color:#1e293b;text-shadow:none;border:2px solid #cbd5e1" onclick="say('white')">White<span>Putih</span></div>
+        <div class="col" style="background:#78716c" onclick="say('brown')">Brown<span>Cokelat</span></div>
+      </div>
+      <div class="nav"><div></div><button class="next" onclick="go(2)">Lanjut →</button></div>
+    </section>
+    <section id="s2">
+      <h2>✏️ Kalimat tentang Warna</h2>
+      <p><strong>What color is it?</strong> → Warna apa ini?</p>
+      <p><strong>It is red.</strong> / <strong>It's red.</strong> → Warnanya merah.</p>
+      <p><strong>My favorite color is blue.</strong> → Warna kesukaanku biru.</p>
+      <p><strong>The apple is red.</strong> → Apel itu berwarna merah.</p>
+      <div class="nav"><button class="prev" onclick="go(1)">← Kembali</button><button class="next" onclick="go(3)">Lanjut →</button></div>
+    </section>
+    <section id="s3">
+      <h2>🎯 Latihan</h2>
+      <p>Coba ucapkan:</p>
+      <div class="grid">
+        <div class="col" style="background:#ef4444" onclick="say('The apple is red')">The apple is red</div>
+        <div class="col" style="background:#3b82f6" onclick="say('The sky is blue')">The sky is blue</div>
+        <div class="col" style="background:#22c55e" onclick="say('The grass is green')">The grass is green</div>
+        <div class="col" style="background:#eab308;color:#1e293b;text-shadow:none" onclick="say('The sun is yellow')">The sun is yellow</div>
+      </div>
+      <div class="nav"><button class="prev" onclick="go(2)">← Kembali</button><button class="next" onclick="go(4)">Lanjut →</button></div>
+    </section>
+    <section id="s4">
+      <h2>✨ Fakta Seru</h2>
+      <p>🌈 Pelangi punya 7 warna: red, orange, yellow, green, blue, indigo, violet.</p>
+      <p>❤️ Di banyak budaya, merah artinya semangat atau cinta.</p>
+      <p>💙 Biru sering dikaitkan dengan ketenangan.</p>
+      <div class="nav"><button class="prev" onclick="go(3)">← Kembali</button><button class="next" onclick="go(5)">Kerjakan Kuis! →</button></div>
+    </section>
+    <section id="s5">
+      <h2>📝 Kuis Colors</h2>
+      <div class="quiz" data-c="b"><h3>1. "Red" artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Biru</div><div class="opt" onclick="pilih(this)" data-v="b">Merah</div><div class="opt" onclick="pilih(this)" data-v="c">Hijau</div>
+      </div>
+      <div class="quiz" data-c="a"><h3>2. Warna langit biasanya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Blue</div><div class="opt" onclick="pilih(this)" data-v="b">Black</div><div class="opt" onclick="pilih(this)" data-v="c">Brown</div>
+      </div>
+      <div class="quiz" data-c="c"><h3>3. "Green" artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Kuning</div><div class="opt" onclick="pilih(this)" data-v="b">Ungu</div><div class="opt" onclick="pilih(this)" data-v="c">Hijau</div>
+      </div>
+      <div class="quiz" data-c="b"><h3>4. Bagaimana bilang "kuning"?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Purple</div><div class="opt" onclick="pilih(this)" data-v="b">Yellow</div><div class="opt" onclick="pilih(this)" data-v="c">Orange</div>
+      </div>
+      <div class="quiz" data-c="a"><h3>5. "My favorite color is pink" artinya?</h3>
+        <div class="opt" onclick="pilih(this)" data-v="a">Warna kesukaanku merah muda</div><div class="opt" onclick="pilih(this)" data-v="b">Aku tidak suka warna</div><div class="opt" onclick="pilih(this)" data-v="c">Warnanya hitam</div>
+      </div>
+      <button class="next" style="display:block;margin:1rem auto" onclick="cek()">Cek Jawaban ✅</button>
+      <div class="result" id="hasil"><div class="score" id="skor">0/5</div><p id="pesan"></p></div>
+      <div class="nav"><button class="prev" onclick="go(4)">← Kembali</button><div></div></div>
+    </section>
+  </main>
+  <div style="text-align:center"><a class="back" href="../index.html">← Kembali ke Astha Belajar Seru</a></div>
+  <footer>Astha Belajar Seru • Bahasa Inggris Kelas 4</footer>
+  <script>
+    let cur=1;const total=5;const dots=document.getElementById('dots');
+    for(let i=1;i<=total;i++){const d=document.createElement('div');d.className='dot'+(i===1?' active':'');d.onclick=()=>go(i);dots.appendChild(d)}
+    function go(n){document.getElementById('s'+cur).classList.remove('active');cur=n;document.getElementById('s'+cur).classList.add('active');
+      document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===cur));document.getElementById('prog').style.width=(cur/total*100)+'%';window.scrollTo({top:0,behavior:'smooth'})}
+    function say(t){if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u)}}
+    function pilih(el){el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel')}
+    function cek(){let s=0;document.querySelectorAll('.quiz').forEach(q=>{const c=q.dataset.c;const sel=q.querySelector('.opt.sel');
+      q.querySelectorAll('.opt').forEach(o=>{o.classList.remove('ok','bad');if(o.dataset.v===c)o.classList.add('ok');if(sel&&o.classList.contains('sel')&&o.dataset.v!==c)o.classList.add('bad')});
+      if(sel&&sel.dataset.v===c)s++});document.getElementById('skor').textContent=s+'/5';
+      document.getElementById('pesan').textContent=s===5?'🎉 Perfect!':s>=3?'👍 Good job!':'💪 Keep practicing!';document.getElementById('hasil').classList.add('show')}
+  </script>
+</body>
+</html>
